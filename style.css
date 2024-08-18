@@ -33,7 +33,7 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-#userName {
+#artistInfo {
     color: var(--accentColor);
     font-size: 1rem;
     font-weight: bold;
@@ -43,6 +43,10 @@ body {
     width: 100%;
     text-align: center;
     text-decoration: none;
+}
+
+#artistInfo > a {
+    color: var(--accentColor);
 }
 
 #links {
