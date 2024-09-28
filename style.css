@@ -23,10 +23,16 @@ body {
     position: relative;
 }
 
+.visually-hidden {
+    position: absolute;
+    top: -50000px;
+    left: -50000px;
+}
+
 #profilePicture, #profilePicture img {
     position: relative;
-    width: 96px;
-    height: 96px;
+    width: 150px;
+    height: 150px;
     display: block;
     margin: 40px auto 20px;
     border-radius: 50%;
@@ -49,14 +55,19 @@ body {
     color: var(--accentColor);
 }
 
-#links {
+h2, h3 {
+    text-align: center;
+    color: var(--accentColor);
+}
+
+section {
     max-width: 675px;
     width: auto;
     display: block;
     margin: 27px auto;
 }
 
-.link {
+.link, article {
     position: relative;
     background-color: transparent;
     color: var(--accentColor);
@@ -74,6 +85,17 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+.player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.player h3 {
+    width: 300px;
+    margin: 0;
+}
+
 @media (hover: hover) {
     .link:hover {
         background-color: var(--accentColor);
@@ -85,6 +107,22 @@ body {
     background-color: var(--accentColor);
     color: var(--bgColor);
 }
+
+#releases > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    #releases > div {
+      flex-direction: column;
+      align-items: center;
+    }
+    #releases > div > iframe:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+  }
 
 #hashtag {
     position: relative;
@@ -136,108 +174,6 @@ body {
     to {
         transform: translateY(-2000px);
     }
-}
-
-
-/*-------------------------popup------------------------*/
-/* credits: https://www.youtube.com/watch?v=lAS2glU0xlc */
-.overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2;
-    visibility: hidden;
-    opacity: 0;
-    overflow: hidden;
-    transition: .5s ease-in-out;
-}
-
-.popup {
-    position: relative;
-    top: -43%;
-    /* right: -100vh; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    /* max-height: 500px; */
-    width: auto;
-    height: auto;
-    margin: 56px;
-    background-color: var(--bgColor);
-    /* transform: rotate(32deg); */
-    transform: scale(0);
-    transition: .5s ease-in-out;
-}
-
-.popup-quote {
-    font-family : Baskerville, Georgia, serif;
-    font-style : italic;
-    position: flex;
-    color: var(--accentColor);
-    padding: 20px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.popup-photo {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-.popup-photo img {
-    width: 100%;
-    height: 100%;
-}
-
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.overlay:target .popup {
-    transform: scale(1);
-    top: 0;
-    /* right: 0; */
-    /* transform: rotate(0); */
-}
-
-.popup-close {
-    position: absolute;
-    right: -1rem;
-    top: -1rem;
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.7rem;
-    font-weight: 400;
-    border-radius: 100%;
-    background-color: var(--bgColor);
-    z-index: 4;
-    color: var(--accentColor);
-    line-height: 2.7rem;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-@media (hover: hover) {
-    .popup-close:hover {
-        background-color: var(--accentColor);
-        color: var(--bgColor);
-    }
-}
-
-.popup-close:active {
-    background-color: var(--accentColor);
-    color: var(--bgColor);
 }
 
 

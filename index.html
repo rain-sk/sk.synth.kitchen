@@ -32,9 +32,12 @@
   <!-- Favicon -->
   <link rel="icon" href="https://i1.sndcdn.com/avatars-DofzOl0NFFLxPSts-uf2Naw-t500x500.jpg" type="image/x-icon" />
   <!-- Font Awesome icons -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
   <!-- Core theme CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="essential_audio/essential_audio.css">
+  <script src="essential_audio/essential_audio.js"></script>
 </head>
 
 <body>
@@ -46,24 +49,10 @@
   </section>
   <!-- End of Parallax Pixel Background Animation -->
 
-  <a id="profilePicture" href="#popup">
-    <img src="https://i1.sndcdn.com/avatars-DofzOl0NFFLxPSts-uf2Naw-t500x500.jpg" alt="Profile Picture">
+  <a id="profilePicture" href="/">
+    <img id="profilePicture" src="https://i1.sndcdn.com/avatars-DofzOl0NFFLxPSts-uf2Naw-t500x500.jpg"
+      alt="Profile Picture">
   </a>
-
-  <div class="overlay" id="popup">
-    <div class="popup">
-      <div class="popup-photo">
-        <a href="https://i1.sndcdn.com/avatars-DofzOl0NFFLxPSts-uf2Naw-t500x500.jpg" target="_blank">
-          <img src="https://i1.sndcdn.com/avatars-DofzOl0NFFLxPSts-uf2Naw-t500x500.jpg" alt="Profile Picture">
-        </a>
-      </div>
-      <div class="popup-quote">
-        You are something the whole universe is doing in the same way that a wave is something that the whole ocean is
-        doing.
-      </div>
-      <a aria-label="close" class="popup-close" onclick="history.back()">&times;</a>
-    </div>
-  </div>
 
   <div id="artistInfo">
     Sk
@@ -71,7 +60,9 @@
     <a href="mailto:rain@synth.kitchen">rain@synth.kitchen</a>
   </div>
 
-  <div id="links">
+  <section id="links">
+    <h2>links</h2>
+
     <a class="link" href="https://sksksk.bandcamp.com/music" target="_blank">
       <i class="fab fa-bandcamp">&nbsp;</i>Bandcamp
     </a>
@@ -84,7 +75,49 @@
     <a class="link" href="https://www.instagram.com/sk_rain_/" target="_blank">
       <i class="fab fa-instagram">&nbsp;</i>Instagram
     </a>
-  </div>
+  </section>
+
+  <section id="streams">
+    <h2>recent sets</h2>
+
+    <article>
+      <div class="player">
+        <h3>CDMX Mix 1</h3>
+        <div class="essential_audio" data-scratch data-passive
+          data-url="https://drive.synth.kitchen/mp3/CDMX_2024-09-28.mp3"></div>
+      </div>
+    </article>
+
+    <article>
+      <div class="player">
+        <h3>Sissy Fest 2024</h3>
+        <div class="essential_audio" data-scratch data-passive
+          data-url="https://drive.synth.kitchen/mp3/Sissy-Fest.mp3"></div>
+      </div>
+    </article>
+
+    <article>
+      <div class="player">
+        <h3>RUSH - June 2024</h3>
+        <div class="essential_audio" data-scratch data-passive
+          data-url="https://drive.synth.kitchen/mp3/RUSH_2024-06.mp3"></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="releases">
+    <h2>releases</h2>
+
+    <div>
+      <iframe style="border: 0; width: 300px; height: 420px;"
+        src="https://bandcamp.com/EmbeddedPlayer/album=820312149/size=large/bgcol=333333/linkcol=0687f5/tracklist=false/transparent=true/"
+        seamless><a href="https://sksksk.bandcamp.com/album/zela">Zela by Sk</a></iframe>
+
+      <iframe style="border: 0; width: 300px; height: 420px;"
+        src="https://bandcamp.com/EmbeddedPlayer/album=906746429/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/"
+        seamless><a href="https://sksksk.bandcamp.com/album/fields">Fields by Sk</a></iframe>
+    </div>
+  </section>
 
   <div id="hashtag">
     #LetItRain🌧️
