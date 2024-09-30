@@ -28,7 +28,7 @@ div.essential_audio > div:nth-child(1) div {
 	border: 1px solid #000;
 	background-color: #000;
 }
-div.essential_audio > div:nth-child(1) div:focus-within {
+div.essential_audio > div:nth-child(1) div.focus {
 	border: 1px solid #fff;
 }
 div.essential_audio > div:nth-child(1) div:after {
@@ -128,7 +128,8 @@ div.essential_audio > div:nth-child(3) {
 /* 1. The Main Container + General Settings */
 div.essential_audio,
 div.essential_audio * {
-	user-select: none;
+	user-select: none!important;
+	-webkit-user-select: none!important;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-overflow-scrolling: auto;
 }
