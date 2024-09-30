@@ -67,6 +67,10 @@ section {
     margin: 27px auto;
 }
 
+.animated-background {
+    max-width: 100vw;
+}
+
 .link, article {
     position: relative;
     background-color: transparent;
