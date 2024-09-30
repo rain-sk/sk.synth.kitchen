@@ -84,7 +84,9 @@ var Essential_Audio = (() => {
       });
       a.za = vo.querySelector(pb).querySelector("div");
       a.za.addEventListener("click", function () {
-        a.button.focus();
+        a.button.focus({
+          preventScroll: true,
+        });
       });
       a.zb = a.za.offsetWidth;
       a.zc = vo.querySelector("div:nth-child(3)");
