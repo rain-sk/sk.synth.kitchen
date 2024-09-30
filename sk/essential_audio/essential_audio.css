@@ -23,8 +23,6 @@ div.essential_audio {
 div.essential_audio > div:nth-child(1) div {
 	width: 28px;
 	height: 28px;
-	margin-top: -13px;
-	border-radius: 50%;
 	border: 1px solid #000;
 	background-color: #000;
 }
@@ -86,15 +84,14 @@ div.essential_audio > div:nth-child(1) div.error:after {
 
 /* 3. The Track */
 div.essential_audio > div:nth-child(2) {
-	height: 2px;
+	height: 30px;
 }
 div.essential_audio > div:nth-child(2):after {
 	content: "";
 	position: absolute;
 	z-index: 0;
-	background-color: #000;
+	background-color: #fff;
 	opacity: 0.3;
-	mix-blend-mode: multiply;
 	top: 0px;
 	left: 0px;
 	width: 100%;
