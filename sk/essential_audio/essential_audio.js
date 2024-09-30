@@ -70,7 +70,6 @@ var Essential_Audio = (() => {
         ? rootDiv.getAttribute("data-title")
         : id;
       updatePlayheadLabel(audio, "play");
-      audio.playhead.append(audio);
       audio.playhead.setAttribute("tab-index", 0);
       audio.playhead.setAttribute("role", "button");
       audio.playheadWidth = audio.playhead.offsetWidth;
