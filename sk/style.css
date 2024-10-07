@@ -39,20 +39,34 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+h1 {
+    margin: 0;
+}
+
 #artistInfo {
     color: var(--accentColor);
     font-size: 1rem;
     font-weight: bold;
     line-height: 1.25;
-    display: block;
     font-family: var(--font);
-    width: 100%;
     text-align: center;
     text-decoration: none;
 }
 
-#artistInfo > a {
+#artistInfo a {
     color: var(--accentColor);
+}
+
+p {
+    max-width: calc(100% - 80px);
+    margin: 0.5rem 0;
+    color: var(--accentColor);
+}
+  
+@media screen and (max-width: 500px) {
+    p {
+        max-width: calc(100% - 2rem);
+    }
 }
 
 h2, h3 {
@@ -63,8 +77,17 @@ h2, h3 {
 section {
     max-width: 675px;
     width: auto;
-    display: block;
     margin: 27px auto;
+}
+
+#artistInfo, #bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bio h2 {
+    margin: 0;
 }
 
 .animated-background {
