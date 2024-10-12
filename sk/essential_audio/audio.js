@@ -95,6 +95,7 @@ var Essential_Audio = (() => {
         a.zd = 0;
       }
       a.ze = vo.getAttribute("data-url");
+      vo.removeAttribute("data-url");
       a.zf = 0;
       a.zg = 0;
       a.zh = f;
