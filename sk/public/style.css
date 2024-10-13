@@ -1,0 +1,155 @@
+
+h1 {
+    margin: 0;
+}
+
+#artistInfo {
+    color: var(--accentColor);
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.25;
+    font-family: var(--font);
+    text-align: center;
+    text-decoration: none;
+}
+
+#artistInfo a {
+    color: var(--accentColor);
+}
+
+p {
+    max-width: calc(100% - 80px);
+    margin: 0.5rem 0;
+    color: var(--accentColor);
+}
+  
+@media screen and (max-width: 500px) {
+    p {
+        max-width: calc(100% - 2rem);
+    }
+}
+
+h2, h3 {
+    text-align: center;
+    color: var(--accentColor);
+}
+
+section {
+    max-width: 675px;
+    width: auto;
+    margin: 27px auto;
+}
+
+#artistInfo, #bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bio h2 {
+    margin: 0;
+}
+
+.animated-background {
+    max-width: 100vw;
+}
+
+.link, article {
+    position: relative;
+    background-color: transparent;
+    color: var(--accentColor);
+    border: solid var(--accentColor) 2px;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: center;
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px; /* 17px */
+    text-decoration: none;
+    /* transition: all .25s cubic-bezier(.08, .59, .29, .99); */
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+    .link:hover {
+        background-color: var(--accentColor);
+        color: var(--bgColor);
+    }
+}
+
+.link:active {
+    background-color: var(--accentColor);
+    color: var(--bgColor);
+}
+
+#releases > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    #releases > div {
+      flex-direction: column;
+      align-items: center;
+    }
+    #releases > div > iframe:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+  }
+
+#hashtag {
+    position: relative;
+    padding-bottom: 20px;
+    color: var(--accentColor);
+    font-size: 1rem;
+    display: block;
+    font-family: var(--font);
+    width: 100%;
+    text-align: center;
+
+    /*  animation   */
+    overflow: hidden;
+    background: linear-gradient(90deg, var(--bgColor), var(--accentColor), var(--bgColor));
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 3s linear var(--delay) infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+
+/*-------------------------animations-----------------------*/
+@keyframes transitionAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+}
+
+@keyframes animStar {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-2000px);
+    }
+}
+
+
