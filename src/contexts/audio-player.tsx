@@ -1,8 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getStream } from "../streams";
 
+type AudioState = Record<string, HTMLAudioElement>;
+type AudioPositionState = Record<string, number>;
+
 type AudioPlayerContextState = {
-  players: Record<string, HTMLAudioElement>;
+  players: AudioState;
+  playerPositions: AudioPositionState;
   activeStreamId?: string;
 };
 
@@ -10,6 +14,7 @@ type AudioPlayerContextCallbacks = {
   setupPlayer: (streamId: string) => void;
   play: (streamId: string) => void;
   pause: (streamId: string) => void;
+  setPosition: (streamId: string, position: number) => void;
 };
 
 type AudioPlayerContextValue = AudioPlayerContextState &
@@ -17,16 +22,54 @@ type AudioPlayerContextValue = AudioPlayerContextState &
 
 export const AudioPlayerContext = React.createContext<AudioPlayerContextValue>({
   players: {},
+  playerPositions: {},
   setupPlayer: () => {},
   play: () => {},
   pause: () => {},
+  setPosition: () => {},
 });
 
 export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [activeStreamId, setActiveStreamId] = useState<string>();
-  const [players, setPlayers] = useState({});
+  const [players, setPlayers] = useState<AudioState>({});
+  const [playerPositions, setPlayerPositions] = useState<AudioPositionState>(
+    {}
+  );
+  const playerPositionsRef = useRef<AudioPositionState>();
+  const timerRef = useRef<number>();
+
+  useEffect(() => {
+    if (
+      activeStreamId !== undefined &&
+      playerPositions[activeStreamId] !== undefined
+    ) {
+      const setCurrentTime = () => {
+        console.log("trying to set current time");
+        if (!isNaN(players[activeStreamId].duration)) {
+          players[activeStreamId].currentTime =
+            playerPositions[activeStreamId] * players[activeStreamId].duration;
+          return;
+        }
+
+        setTimeout(() => {
+          setCurrentTime();
+        }, 10);
+      };
+    }
+  }, [activeStreamId, players, playerPositions]);
+
+  const startTimer = (audio: HTMLAudioElement, streamId: string) => {
+    timerRef.current = setInterval(() => {
+      if (playerPositionsRef.current) {
+        playerPositionsRef.current[streamId] =
+          audio.currentTime / audio.duration;
+      }
+
+      setPlayerPositions({ ...playerPositionsRef.current });
+    }, 1000);
+  };
 
   const setupPlayer = useCallback(
     (streamId: string) => {
@@ -52,13 +95,32 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
         audio.currentTime = 0;
         setActiveStreamId(undefined);
       };
+      audio.onplaying = () => {
+        startTimer(audio, streamId);
+      };
+      const stopTimer = () => {
+        if (timerRef.current !== undefined) {
+          clearInterval(timerRef.current);
+          timerRef.current = undefined;
+        }
+      };
+      audio.onpause = stopTimer;
+      audio.onerror = stopTimer;
 
       setPlayers({
         ...players,
         [streamId]: audio,
       });
+      if (!playerPositionsRef.current) {
+        playerPositionsRef.current = {};
+        playerPositionsRef.current[streamId] = 0;
+      }
+      setPlayerPositions({
+        ...playerPositionsRef.current,
+        [streamId]: 0,
+      });
     },
-    [players, setPlayers]
+    [playerPositionsRef, players, setPlayerPositions, setPlayers]
   );
 
   const pause = useCallback(
@@ -93,16 +155,38 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
         pause(activeStreamId);
       }
 
-      players[streamId].play();
-
       setActiveStreamId(streamId);
+      players[streamId].play();
     },
-    [activeStreamId, pause, players, setActiveStreamId]
+    [activeStreamId, pause, players, playerPositions, setActiveStreamId]
+  );
+
+  const setPosition = useCallback(
+    (streamId: string, position: number) => {
+      if (playerPositionsRef.current) {
+        playerPositionsRef.current[streamId] = position;
+      }
+      setPlayerPositions({
+        ...playerPositionsRef.current,
+      });
+      if (!isNaN(players[streamId].duration)) {
+        players[streamId].currentTime = position * players[streamId].duration;
+      }
+    },
+    [playerPositionsRef, players, setPlayerPositions]
   );
 
   return (
     <AudioPlayerContext.Provider
-      value={{ players, activeStreamId, setupPlayer, play, pause }}
+      value={{
+        players,
+        playerPositions,
+        activeStreamId,
+        setupPlayer,
+        play,
+        pause,
+        setPosition,
+      }}
     >
       {children}
     </AudioPlayerContext.Provider>

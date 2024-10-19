@@ -16,9 +16,15 @@ type AudioPlayerProps = {
 };
 
 export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
-  const { activeStreamId, players, setupPlayer, play, pause } =
-    useContext(AudioPlayerContext);
-  const [playheadPosition, setPlayheadPosition] = useState(0);
+  const {
+    activeStreamId,
+    players,
+    playerPositions,
+    setupPlayer,
+    play,
+    pause,
+    setPosition,
+  } = useContext(AudioPlayerContext);
   const animationRef = useRef<number>();
   const dragPositionRef = useRef<number>();
   const draggingRef = useRef<boolean>(false);
@@ -34,16 +40,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
     }
   }, [animationRef]);
 
-  const animate = useCallback(() => {
-    if (playing) {
-      animationRef.current = setInterval(() => {
-        setPlayheadPosition(
-          players[streamId].currentTime / players[streamId].duration
-        );
-      }, 1000);
-    }
-  }, [animationRef, players, playing, setPlayheadPosition, streamId]);
-
   useEffect(() => {
     if (!initialized) {
       setupPlayer(streamId);
@@ -51,26 +47,20 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
   }, [initialized, setupPlayer, streamId]);
 
   useEffect(() => {
-    if (buttonRef.current && buttonRef.current.parentNode) {
-      buttonRef.current.style.left = `${
-        (buttonRef.current.parentNode.clientWidth -
-          buttonRef.current.clientWidth) *
-        playheadPosition
-      }px`;
+    if (buttonRef.current && buttonRef.current.parentElement) {
+      if (!draggingRef.current) {
+        buttonRef.current.style.left = `${
+          (buttonRef.current.parentElement.clientWidth -
+            buttonRef.current.clientWidth) *
+          playerPositions[streamId]
+        }px`;
+      }
     }
-  }, [playheadPosition, playing, buttonRef]);
+  }, [playerPositions, playing, streamId, buttonRef]);
 
   useEffect(() => {
     clearAnimation();
-    animate();
-  }, [
-    animate,
-    clearAnimation,
-    players,
-    playing,
-    setPlayheadPosition,
-    streamId,
-  ]);
+  }, [clearAnimation, players, playing, streamId]);
 
   const onMouseDown = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -81,10 +71,14 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         dragPositionRef.current = e.screenX;
 
         const setButtonPosition = (screenX: number) => {
-          if (buttonRef.current && dragPositionRef.current) {
+          if (
+            buttonRef.current &&
+            buttonRef.current.parentElement &&
+            dragPositionRef.current
+          ) {
             const min = 0;
             const max =
-              buttonRef.current.parentNode.clientWidth -
+              buttonRef.current.parentElement.clientWidth -
               buttonRef.current.clientWidth;
             const currentPosition = parseFloat(
               buttonRef.current.style.left.replace("px", "")
@@ -100,17 +94,17 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         };
 
         const seekToButtonPosition = () => {
-          if (buttonRef.current) {
+          if (buttonRef.current && buttonRef.current.parentElement) {
             const position = parseFloat(
               buttonRef.current.style.left.replace("px", "")
             );
+
             const relativePosition =
               position /
-              (buttonRef.current.parentNode.clientWidth -
+              (buttonRef.current.parentElement.clientWidth -
                 buttonRef.current.clientWidth);
 
-            players[streamId].currentTime =
-              relativePosition * players[streamId].duration;
+            setPosition(streamId, relativePosition);
           }
         };
 
@@ -136,23 +130,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
           document.body.removeEventListener("mousemove", onMouseMove);
 
           draggingRef.current = false;
-          animate();
         };
 
         document.body.addEventListener("mouseup", onMouseUp);
         document.body.addEventListener("mousemove", onMouseMove);
       }
     },
-    [
-      animate,
-      buttonRef,
-      clearAnimation,
-      pause,
-      play,
-      players,
-      playing,
-      streamId,
-    ]
+    [buttonRef, clearAnimation, pause, play, players, playing, streamId]
   );
 
   const onKeyDown = useCallback(
