@@ -25,6 +25,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
     pause,
     setPosition,
   } = useContext(AudioPlayerContext);
+  const [draggingButtonPosition, setDraggingButtonPosition] =
+    useState<number>();
+
   const animationRef = useRef<number>();
   const dragPositionRef = useRef<number>();
   const draggingRef = useRef<boolean>(false);
@@ -77,6 +80,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
               max,
               Math.max(min, currentPosition + diff)
             );
+            setDraggingButtonPosition(newPosition);
             buttonRef.current.style.left = `${newPosition}px`;
             dragPositionRef.current = screenX;
           }
@@ -93,6 +97,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
               (buttonRef.current.parentElement.clientWidth -
                 buttonRef.current.clientWidth);
 
+            setDraggingButtonPosition(undefined);
             setPosition(streamId, relativePosition);
           }
         };
@@ -153,16 +158,15 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         onKeyDown={onKeyDown}
         ref={buttonRef}
         style={{
-          left: (() => {
-            if (buttonRef.current && buttonRef.current.parentElement) {
-              return `${
+          left: draggingButtonPosition
+            ? `${draggingButtonPosition}px`
+            : buttonRef.current && buttonRef.current.parentElement
+            ? `${
                 (buttonRef.current.parentElement.clientWidth -
                   buttonRef.current.clientWidth) *
                 playerPosition
-              }px`;
-            }
-            return "0px";
-          })(),
+              }px`
+            : "0px",
         }}
       >
         <span className="visually-hidden">{playing ? "pause" : "play"}</span>
