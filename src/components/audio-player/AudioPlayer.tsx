@@ -32,6 +32,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
 
   const initialized = streamId in players;
   const playing = activeStreamId === streamId;
+  const playerPosition = playerPositions[streamId];
 
   const clearAnimation = useCallback(() => {
     if (animationRef.current !== undefined) {
@@ -45,18 +46,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
       setupPlayer(streamId);
     }
   }, [initialized, setupPlayer, streamId]);
-
-  useEffect(() => {
-    if (buttonRef.current && buttonRef.current.parentElement) {
-      if (!draggingRef.current) {
-        buttonRef.current.style.left = `${
-          (buttonRef.current.parentElement.clientWidth -
-            buttonRef.current.clientWidth) *
-          playerPositions[streamId]
-        }px`;
-      }
-    }
-  }, [playerPositions, playing, streamId, buttonRef]);
 
   useEffect(() => {
     clearAnimation();
@@ -163,6 +152,18 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}
         ref={buttonRef}
+        style={{
+          left: (() => {
+            if (buttonRef.current && buttonRef.current.parentElement) {
+              return `${
+                (buttonRef.current.parentElement.clientWidth -
+                  buttonRef.current.clientWidth) *
+                playerPosition
+              }px`;
+            }
+            return "0px";
+          })(),
+        }}
       >
         <span className="visually-hidden">{playing ? "pause" : "play"}</span>
         {playing ? (

@@ -46,7 +46,6 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
       playerPositions[activeStreamId] !== undefined
     ) {
       const setCurrentTime = () => {
-        console.log("trying to set current time");
         if (!isNaN(players[activeStreamId].duration)) {
           players[activeStreamId].currentTime =
             playerPositions[activeStreamId] * players[activeStreamId].duration;
