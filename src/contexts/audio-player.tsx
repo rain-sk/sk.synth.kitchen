@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { getStream } from "../streams";
 
 type AudioState = Record<string, HTMLAudioElement>;
@@ -40,24 +40,24 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   const playerPositionsRef = useRef<AudioPositionState>();
   const timerRef = useRef<number>();
 
-  useEffect(() => {
-    if (
-      activeStreamId !== undefined &&
-      playerPositions[activeStreamId] !== undefined
-    ) {
-      const setCurrentTime = () => {
-        if (!isNaN(players[activeStreamId].duration)) {
-          players[activeStreamId].currentTime =
-            playerPositions[activeStreamId] * players[activeStreamId].duration;
-          return;
-        }
+  // useEffect(() => {
+  //   if (
+  //     activeStreamId !== undefined &&
+  //     playerPositions[activeStreamId] !== undefined
+  //   ) {
+  //     const setCurrentTime = () => {
+  //       if (!isNaN(players[activeStreamId].duration)) {
+  //         players[activeStreamId].currentTime =
+  //           playerPositions[activeStreamId] * players[activeStreamId].duration;
+  //         return;
+  //       }
 
-        setTimeout(() => {
-          setCurrentTime();
-        }, 10);
-      };
-    }
-  }, [activeStreamId, players, playerPositions]);
+  //       setTimeout(() => {
+  //         setCurrentTime();
+  //       }, 10);
+  //     };
+  //   }
+  // }, [activeStreamId, players, playerPositions]);
 
   const startTimer = (audio: HTMLAudioElement, streamId: string) => {
     timerRef.current = setInterval(() => {
@@ -157,7 +157,7 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
       setActiveStreamId(streamId);
       players[streamId].play();
     },
-    [activeStreamId, pause, players, playerPositions, setActiveStreamId]
+    [activeStreamId, pause, players, setActiveStreamId]
   );
 
   const setPosition = useCallback(

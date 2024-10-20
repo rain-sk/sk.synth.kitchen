@@ -130,7 +130,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         document.body.addEventListener("mousemove", onMouseMove);
       }
     },
-    [buttonRef, clearAnimation, pause, play, players, playing, streamId]
+    [buttonRef, clearAnimation, pause, play, playing, setPosition, streamId]
   );
 
   const onKeyDown = useCallback(
@@ -150,24 +150,36 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
     [pause, play, players, playing, streamId]
   );
 
+  const calcLeft = useCallback(
+    () =>
+      draggingButtonPosition
+        ? `${draggingButtonPosition}px`
+        : buttonRef.current && buttonRef.current.parentElement
+        ? `${
+            (buttonRef.current.parentElement.clientWidth -
+              buttonRef.current.clientWidth) *
+            playerPosition
+          }px`
+        : "0px",
+    [draggingButtonPosition, buttonRef, playerPosition]
+  );
+
+  const [left, setLeft] = useState(calcLeft());
+  useEffect(() => {
+    setLeft(calcLeft());
+  }, [buttonRef, draggingButtonPosition, playerPosition, setLeft]);
+
   return initialized ? (
     <div className="player">
       <button
         type="button"
         onMouseDown={onMouseDown}
         onKeyDown={onKeyDown}
-        ref={buttonRef}
-        style={{
-          left: draggingButtonPosition
-            ? `${draggingButtonPosition}px`
-            : buttonRef.current && buttonRef.current.parentElement
-            ? `${
-                (buttonRef.current.parentElement.clientWidth -
-                  buttonRef.current.clientWidth) *
-                playerPosition
-              }px`
-            : "0px",
+        ref={(button) => {
+          buttonRef.current = button ?? undefined;
+          setLeft(calcLeft);
         }}
+        style={{ left }}
       >
         <span className="visually-hidden">{playing ? "pause" : "play"}</span>
         {playing ? (
