@@ -162,6 +162,7 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
 
   const setPosition = useCallback(
     (streamId: string, position: number) => {
+      position = Math.max(0, Math.min(1, position));
       if (playerPositionsRef.current) {
         playerPositionsRef.current[streamId] = position;
       }
