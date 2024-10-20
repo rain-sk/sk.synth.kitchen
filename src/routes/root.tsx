@@ -1,17 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import { ProfilePicture } from "../components/profile-picture/ProfilePicture";
+import { Header } from "../components/header/Header";
 
 export const Root: React.FC = () => (
   <>
-    <ProfilePicture />
-    <section>
-      <h1>Sk</h1>
-      <p>
-        Booking: <a href="mailto:rain@synth.kitchen">rain@synth.kitchen</a>
-      </p>
-    </section>
+    <Header />
     <Outlet />
   </>
 );

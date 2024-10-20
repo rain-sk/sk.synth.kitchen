@@ -1,0 +1,19 @@
+nav {
+  display: flex;
+  max-width: 675px;
+  width: auto;
+  margin: 40px auto 20px;
+  text-align: right;
+}
+
+nav > div {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1, p {
+  color: #fff;
+  margin: 0.5rem 0;
+}

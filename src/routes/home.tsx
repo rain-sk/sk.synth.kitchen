@@ -1,13 +1,13 @@
 import React from "react";
 
-import { AudioStream } from "../components/audio-stream/AudioStream";
-import { streams } from "../streams";
-
-const AllStreams: React.FC = () =>
-  streams.map((stream) => (
-    <AudioStream key={stream.streamId} expanded={false} {...stream} />
-  ));
+import { Releases } from "../components/releases/Releases";
+import { AllStreams } from "../components/audio-stream/AllStreams";
 
 export const Home: React.FC = () => {
-  return <AllStreams />;
+  return (
+    <>
+      <Releases />
+      <AllStreams />
+    </>
+  );
 };

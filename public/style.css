@@ -1,25 +1,7 @@
 
-h1 {
-    margin: 0;
-}
 
-#artistInfo {
-    color: var(--accentColor);
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 1.25;
-    font-family: var(--font);
-    text-align: center;
-    text-decoration: none;
-}
-
-#artistInfo a {
-    color: var(--accentColor);
-}
 
 p {
-    max-width: calc(100% - 80px);
-    margin: 0.5rem 0;
     color: var(--accentColor);
 }
   
@@ -48,10 +30,6 @@ section {
 
 #bio h2 {
     margin: 0;
-}
-
-.animated-background {
-    max-width: 100vw;
 }
 
 .link, article {
