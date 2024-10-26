@@ -4,22 +4,10 @@
 p {
     color: var(--accentColor);
 }
-  
-@media screen and (max-width: 500px) {
-    p {
-        max-width: calc(100% - 2rem);
-    }
-}
 
 h2, h3 {
     text-align: center;
     color: var(--accentColor);
-}
-
-section {
-    max-width: 675px;
-    width: auto;
-    margin: 27px auto;
 }
 
 #artistInfo, #bio {
@@ -32,32 +20,37 @@ section {
     margin: 0;
 }
 
-.link, article {
+.link {
     position: relative;
     background-color: transparent;
     color: var(--accentColor);
-    border: solid var(--accentColor) 2px;
+    border: solid var(--accentColor) 0.1rem;
     border-radius: 10px;
     font-size: 1rem;
     text-align: center;
-    display: block;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 10px; /* 17px */
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem 1rem 0.5rem;
+    padding: 0.4rem;
     text-decoration: none;
     /* transition: all .25s cubic-bezier(.08, .59, .29, .99); */
     -webkit-tap-highlight-color: transparent;
 }
 
+.link p {
+    text-align: center;
+    flex-grow: 1;
+    margin:0;
+}
+
 @media (hover: hover) {
-    .link:hover {
+    .link:hover, .link:hover p {
         background-color: var(--accentColor);
         color: var(--bgColor);
     }
 }
 
-.link:active {
+.link:active, .link:active p {
     background-color: var(--accentColor);
     color: var(--bgColor);
 }
@@ -118,15 +111,6 @@ section {
     }
     100% {
       background-position: 500%;
-    }
-}
-
-@keyframes animStar {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-2000px);
     }
 }
 

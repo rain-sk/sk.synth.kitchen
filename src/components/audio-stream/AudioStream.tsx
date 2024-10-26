@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AudioPlayer } from "../audio-player/AudioPlayer";
+import "./AudioStream.css";
 
 type StreamProps = {
   expanded: boolean;
@@ -16,18 +17,18 @@ export const AudioStream: React.FC<StreamProps> = ({
   tracklist,
 }) => {
   return (
-    <section>
-      <h2>
+    <>
+      <h3>
         <Link to={`/stream/${streamId}`}>{title}</Link>
-      </h2>
+      </h3>
       <AudioPlayer streamId={streamId} />
       {expanded && tracklist ? (
-        <ul>
+        <ul className="tracklist">
           {tracklist.map((track, index) => (
             <li key={index}>{track}</li>
           ))}
         </ul>
       ) : null}
-    </section>
+    </>
   );
 };

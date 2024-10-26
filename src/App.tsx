@@ -5,8 +5,6 @@ import { Error } from "./routes/error";
 import { Root } from "./routes/root";
 import { Stream } from "./routes/stream";
 
-import { ParallaxBackground } from "./components/parallax-background/ParallaxBackground";
-
 import "./App.css";
 import { Home } from "./routes/home";
 import { AudioPlayerContextProvider } from "./contexts/audio-player";
@@ -31,7 +29,6 @@ const router = createBrowserRouter([
 
 export const App: React.FC = () => (
   <AudioPlayerContextProvider>
-    <ParallaxBackground />
     <RouterProvider router={router} />
   </AudioPlayerContextProvider>
 );

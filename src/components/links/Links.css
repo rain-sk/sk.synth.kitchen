@@ -1,0 +1,11 @@
+ul.socials {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+ul.socials  a {
+  margin: 0 0.75rem;
+}

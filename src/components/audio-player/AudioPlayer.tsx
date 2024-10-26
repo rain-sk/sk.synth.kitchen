@@ -76,12 +76,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
               buttonRef.current.style.left.replace("px", "")
             );
             const diff = screenX - dragPositionRef.current;
-            const newPosition = Math.min(
-              max,
-              Math.max(min, currentPosition + diff)
+            console.log(screenX, dragPositionRef.current);
+            const newPosition = Math.max(
+              min,
+              Math.min(max, currentPosition + diff)
             );
+            console.log(newPosition);
             setDraggingButtonPosition(newPosition);
-            buttonRef.current.style.left = `${newPosition}px`;
             dragPositionRef.current = screenX;
           }
         };
@@ -150,24 +151,24 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
     [pause, play, players, playing, streamId]
   );
 
-  const calcLeft = useCallback(
-    () =>
-      draggingButtonPosition
-        ? `${draggingButtonPosition}px`
-        : buttonRef.current && buttonRef.current.parentElement
-        ? `${
-            (buttonRef.current.parentElement.clientWidth -
-              buttonRef.current.clientWidth) *
-            playerPosition
-          }px`
-        : "0px",
-    [draggingButtonPosition, buttonRef, playerPosition]
-  );
+  const calcLeft = useCallback(() => {
+    return draggingButtonPosition
+      ? `${draggingButtonPosition}px`
+      : buttonRef.current &&
+        buttonRef.current.parentElement &&
+        playerPosition !== undefined
+      ? `${
+          (buttonRef.current.parentElement.clientWidth -
+            buttonRef.current.clientWidth) *
+          playerPosition
+        }px`
+      : "0px";
+  }, [draggingButtonPosition, buttonRef, playerPosition]);
 
   const [left, setLeft] = useState(calcLeft());
   useEffect(() => {
     setLeft(calcLeft());
-  }, [buttonRef, draggingButtonPosition, playerPosition, setLeft]);
+  }, [calcLeft, setLeft, draggingButtonPosition, playerPosition]);
 
   return initialized ? (
     <div className="player">
@@ -177,7 +178,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         onKeyDown={onKeyDown}
         ref={(button) => {
           buttonRef.current = button ?? undefined;
-          setLeft(calcLeft);
+          setLeft(calcLeft());
         }}
         style={{ left }}
       >

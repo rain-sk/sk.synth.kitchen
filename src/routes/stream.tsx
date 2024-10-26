@@ -23,11 +23,15 @@ export const Stream: React.FC = () => {
   }
 
   return (
-    <AudioStream
-      expanded={true}
-      streamId={stream.streamId}
-      title={stream.title}
-      tracklist={stream.tracklist}
-    />
+    <main>
+      <section>
+        <AudioStream
+          expanded={true}
+          streamId={stream.streamId}
+          title={stream.title}
+          tracklist={stream.tracklist}
+        />
+      </section>
+    </main>
   );
 };
