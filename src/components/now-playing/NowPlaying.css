@@ -1,0 +1,13 @@
+aside.now-playing {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  height: 3rem;
+  background-color: #f0f8ffde;
+}
+
+aside.now-playing p, aside.now-playing a {
+  color: #000;
+}

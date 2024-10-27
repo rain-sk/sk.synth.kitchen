@@ -18,11 +18,12 @@ article {
   -webkit-tap-highlight-color: transparent;
 }
 
-article header {
+section > header, article > header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  color: #fff;
 }
 
 article h3 {

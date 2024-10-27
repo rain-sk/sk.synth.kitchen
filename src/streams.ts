@@ -2,14 +2,16 @@ export type StreamInfo = {
   streamId: string;
   url: string;
   title: string;
+  info: string;
   tracklist?: string[];
 };
 
-export const streams: StreamInfo[] = [
-  {
+export const streamsMap: Record<string, StreamInfo> = {
+  "sunrise-trance": {
     streamId: "sunrise-trance",
     url: "/mp3/Sunrise-Trance_2024-10-26.mp3",
     title: "Sunrise Trance Set",
+    info: "Berlin - 26.10.2024",
     tracklist: [
       "S Mobile - Patrick Holland",
       "Wither - Browncoat",
@@ -43,21 +45,81 @@ export const streams: StreamInfo[] = [
       "Killing Time - Mat Zo",
     ],
   },
-  {
+  "sala-sonari": {
     streamId: "sala-sonari",
     url: "/mp3/Sala-Sonari_2024-10-10.mp3",
     title: "Sala Sonari",
+    info: "Mexico City - 10.10.2024",
+    tracklist: [
+      "Shangri-La (Psychemagik Remix) - YACHT",
+      "Morning Glow (Ft. Nicholas Mangiafico) - Dom McLennon",
+      "Stardust - Kohra",
+      "Plume - Legove",
+      "Flesh on Concrete (King Sleepy Remix) - Eira",
+      "Anita (Original Mix) - Gigi Fajardo",
+      "Rain (Original Mix) - Marcello V.O.R.",
+      "Aucklands Groove - Sam Alfred",
+      "hwbouths - Knxwledge",
+      "watchyaback! - wev",
+      "finishit - Knxwledge",
+      "Vocoder [Club Mix] - Floating Points",
+      "liquid - Knxwledge",
+      "Free (Original Mix) - Pavilac",
+      "Choose Me - Bella Cuts",
+      "I Get Lifted (Rajah's Booty Mix) - Devoye",
+      "Find The Way - Peggy Gou",
+      "Body Pump (Original Mix) - Sidney Charles",
+      "Samba De-La Cruz - Tres-Men",
+      "ok - Knxwledge",
+      "In the Mood - Fred P",
+      "Ultimate Lovestory Fantasy - Palmbomen II",
+      "pixel glow (feat IVNA) - cadeu",
+      "Cloudy (Kelbin Remix) - Daphni",
+      "El Omma - Cali Kula",
+      "Forest Fires - XXYYXX",
+      "Sunday Loop (Traumer Stripped Down) - DJ Deep, Traumer",
+      "I Need to Tell You Something - Vitling",
+      "Perfect Combination (Codes Remix) - Kill the Noise",
+      "Defusion Solution (Original Mix) - Jhobei",
+      "Universe Love (Devoye's Walk Mix) - Devoye",
+      "Complications - Deadmau5",
+    ],
   },
-  {
+  cdmix: {
     streamId: "cdmix",
     url: "/mp3/CDMX_2024-09-28.mp3",
     title: "CDMX Mix",
+    info: "Mexico City - 29.09.2024",
   },
-  {
+  "sissy-fest": {
     streamId: "sissy-fest",
     url: "/mp3/Sissy-Fest.mp3",
     title: "Sissy Fest 2024",
+    info: "Berlin - 11.08.2024",
+    tracklist: [
+      "Feel The Funk (Computer Love) - Sebastian Knight",
+      "Get Down 2 Get Up feat. The Knocks (Original Mix) - Mat Zo",
+      "Oldskool Trip V2 (Howyoumakeusfeel) - Mat Zo",
+      "Pachinko (22 EDO-Pajara) - Rodrigo Sena",
+      "Morning Glow (Ft. Nicholas Mangiafico) - Dom McLennon",
+      "Hello World (Kiwamu Remix) - Nhato",
+      "Another Station (Todd Terje Remix) - Lindstrom",
+      "Sinful - Mat Zo",
+      "Flesh on Concrete (King Sleepy's Refractory Mix) - Eira",
+      "Party in Me - Duck Sauce",
+      "Show - Sk",
+      "Futuristic Love - Geotheory",
+      "I Like It Like That - Hideki Naganuma",
+      "Rock It On (Deavid Soul Remix) - Hideki Naganuma",
+    ],
   },
+};
+
+export const streams: StreamInfo[] = [
+  streamsMap["sunrise-trance"],
+  streamsMap["sala-sonari"],
+  streamsMap["cdmix"],
+  streamsMap["sissy-fest"],
 ];
 
 export const getStream = (streamId: string) => {
