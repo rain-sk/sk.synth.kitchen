@@ -8,6 +8,7 @@ import { Stream } from "./routes/stream";
 import "./App.css";
 import { Home } from "./routes/home";
 import { AudioPlayerContextProvider } from "./contexts/audio-player";
+import { PlayerApiContextProvider } from "./contexts/plays-api";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
 ]);
 
 export const App: React.FC = () => (
-  <AudioPlayerContextProvider>
-    <RouterProvider router={router} />
-  </AudioPlayerContextProvider>
+  <PlayerApiContextProvider>
+    <AudioPlayerContextProvider>
+      <RouterProvider router={router} />
+    </AudioPlayerContextProvider>
+  </PlayerApiContextProvider>
 );

@@ -1,5 +1,12 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { getStream } from "../streams";
+import { PlayerApiContext } from "./plays-api";
 
 type AudioState = Record<string, HTMLAudioElement>;
 type AudioPositionState = Record<string, number>;
@@ -32,6 +39,7 @@ export const AudioPlayerContext = React.createContext<AudioPlayerContextValue>({
 export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const activeStreamRef = useRef<string>();
   const [activeStreamId, setActiveStreamId] = useState<string>();
   const [players, setPlayers] = useState<AudioState>({});
   const [playerPositions, setPlayerPositions] = useState<AudioPositionState>(
@@ -39,25 +47,27 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   );
   const playerPositionsRef = useRef<AudioPositionState>();
   const timerRef = useRef<number>();
+  const { incrementPlayCount } = useContext(PlayerApiContext);
 
-  // useEffect(() => {
-  //   if (
-  //     activeStreamId !== undefined &&
-  //     playerPositions[activeStreamId] !== undefined
-  //   ) {
-  //     const setCurrentTime = () => {
-  //       if (!isNaN(players[activeStreamId].duration)) {
-  //         players[activeStreamId].currentTime =
-  //           playerPositions[activeStreamId] * players[activeStreamId].duration;
-  //         return;
-  //       }
+  const playTimerRef = useRef<number>();
+  useEffect(() => {
+    if (playTimerRef.current) {
+      clearTimeout(playTimerRef.current);
+      playTimerRef.current = undefined;
+    }
 
-  //       setTimeout(() => {
-  //         setCurrentTime();
-  //       }, 10);
-  //     };
-  //   }
-  // }, [activeStreamId, players, playerPositions]);
+    if (
+      activeStreamId !== undefined &&
+      activeStreamId !== activeStreamRef.current
+    ) {
+      playTimerRef.current = setTimeout(() => {
+        if (activeStreamId === activeStreamRef.current) {
+          incrementPlayCount(activeStreamId);
+        }
+      }, 30000);
+    }
+    activeStreamRef.current = activeStreamId;
+  }, [activeStreamRef, activeStreamId, incrementPlayCount]);
 
   const startTimer = (audio: HTMLAudioElement, streamId: string) => {
     timerRef.current = setInterval(() => {

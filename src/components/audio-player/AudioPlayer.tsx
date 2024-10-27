@@ -76,12 +76,10 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
               buttonRef.current.style.left.replace("px", "")
             );
             const diff = screenX - dragPositionRef.current;
-            console.log(screenX, dragPositionRef.current);
             const newPosition = Math.max(
               min,
               Math.min(max, currentPosition + diff)
             );
-            console.log(newPosition);
             setDraggingButtonPosition(newPosition);
             dragPositionRef.current = screenX;
           }

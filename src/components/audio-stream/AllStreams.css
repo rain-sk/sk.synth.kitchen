@@ -17,6 +17,12 @@ article {
   -webkit-tap-highlight-color: transparent;
 }
 
+article header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 article h3 {
   margin: 0
 }

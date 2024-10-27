@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AudioPlayer } from "../audio-player/AudioPlayer";
 import "./AudioStream.css";
+import { PlayerApiContext } from "../../contexts/plays-api";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type StreamProps = {
   expanded: boolean;
@@ -16,11 +19,19 @@ export const AudioStream: React.FC<StreamProps> = ({
   title,
   tracklist,
 }) => {
+  const { players } = useContext(PlayerApiContext);
   return (
     <>
-      <h3>
-        <Link to={`/stream/${streamId}`}>{title}</Link>
-      </h3>
+      <header>
+        <h3>
+          <Link to={`/stream/${streamId}`}>{title}</Link>
+        </h3>
+        {players && players[streamId] ? (
+          <p>
+            <FontAwesomeIcon icon={faPlay} /> {players[streamId].plays}
+          </p>
+        ) : null}
+      </header>
       <AudioPlayer streamId={streamId} />
       {expanded && tracklist ? (
         <ul className="tracklist">
