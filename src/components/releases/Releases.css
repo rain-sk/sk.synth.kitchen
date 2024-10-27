@@ -6,9 +6,16 @@ div.releases {
 
 div.releases iframe {
   border: none;
-  width: 300px;
+  width: calc((675px / 2) - 2rem);
   height: 42px;
   margin: 0.5rem 0 0;
+}
+
+div.releases article p {
+  margin: 0.5rem 0 0;
+  text-align: left;
+  font-size: 11px;
+  display: inline-block;
 }
 
 @media screen and (max-width: 700px) {
@@ -17,8 +24,8 @@ div.releases iframe {
     align-items: center;
   }
 
-  div.releases article:first-of-type {
-    margin: 0 0 1rem;
+  div.releases article {
+    margin: 0 0.5rem 1rem;
   }
 
   div.releases iframe {

@@ -16,7 +16,13 @@ export const Releases: React.FC = () => (
         >
           <a href="https://sksksk.bandcamp.com/album/zela">Zela by Sk</a>
         </iframe>
-        <p></p>
+        <p>
+          A sonic journey that combines elements of techno, house, and
+          experimental electronics. Each track blends into the next, creating a
+          narrative arc that draws listeners in from start to finish. Zela
+          represents a natural progression for Sk as an artist, showcasing the
+          evolution of their creative vision.
+        </p>
       </article>
       <article>
         <header>
@@ -29,7 +35,13 @@ export const Releases: React.FC = () => (
         >
           <a href="https://sksksk.bandcamp.com/album/fields">Fields by Sk</a>
         </iframe>
-        <p></p>
+        <p>
+          Fields is Sk's debut EP , showcasing the diverse range of genres and
+          styles that have captured their imagination. From minimal/ambient
+          house to "sound fields", Fields is an eclectic journey into the sonic
+          landscapes that inspire Sk. Through this release, Sk invites listeners
+          to explore the interplay between music and environment.
+        </p>
       </article>
     </div>
   </section>
