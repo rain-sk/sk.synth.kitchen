@@ -25,8 +25,8 @@ export const Bio: React.FC = () => (
       <a href="https://synth.kitchen" target="_blank">
         synth.kitchen
       </a>
-      , a web-based modular synthesis environment geared toward
-      experimentalsound design.
+      , a web-based modular synthesis environment geared toward experimental
+      sound design.
     </p>
     <p>
       Currently Sk is focusing on some soon-to-be-released collaborations and a

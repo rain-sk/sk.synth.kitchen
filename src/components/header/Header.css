@@ -11,6 +11,7 @@ nav > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: end;
 }
 
 nav h1, nav p {
