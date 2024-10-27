@@ -36,11 +36,11 @@ export const Releases: React.FC = () => (
           <a href="https://sksksk.bandcamp.com/album/fields">Fields by Sk</a>
         </iframe>
         <p>
-          Fields is Sk's debut EP , showcasing the diverse range of genres and
-          styles that have captured their imagination. From minimal/ambient
-          house to "sound fields", Fields is an eclectic journey into the sonic
-          landscapes that inspire Sk. Through this release, Sk invites listeners
-          to explore the interplay between music and environment.
+          Sk's debut EP , showcasing the diverse range of genres and styles that
+          have captured their imagination. From minimal/ambient house to "sound
+          fields", Fields is an eclectic journey into the sonic landscapes that
+          inspire Sk. Through this release, Sk invites listeners to explore the
+          interplay between music and environment.
         </p>
       </article>
     </div>
