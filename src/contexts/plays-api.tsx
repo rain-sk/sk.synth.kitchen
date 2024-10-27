@@ -96,7 +96,12 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
 
   const incrementPlayCount = useCallback(
     (name: string) => {
-      if (!token || !players || !players[name]) {
+      if (
+        !token ||
+        !players ||
+        !players[name] ||
+        import.meta.env.MODE === "development"
+      ) {
         return;
       }
 
