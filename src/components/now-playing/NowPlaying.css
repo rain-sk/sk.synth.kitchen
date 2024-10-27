@@ -11,3 +11,7 @@ aside.now-playing {
 aside.now-playing p, aside.now-playing a {
   color: #000;
 }
+
+aside.now-playing a {
+  font-weight: bold;
+}
