@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AudioPlayer } from "../audio-player/AudioPlayer";
 import "./AudioStream.css";
-import { streams, streamsMap } from "../../streams";
+import { streamsMap } from "../../streams";
 
 // import { PlayerApiContext } from "../../contexts/plays-api";
 // import { faPlay } from "@fortawesome/free-solid-svg-icons";
