@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEffectOnce } from "../hooks/use-effect-once";
 
 type PlayerInfo = {
@@ -36,6 +36,7 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [token, setToken] = useState<TokenResponse>();
+  const playersRef = useRef<Record<string, PlayerInfo>>({});
   const [players, setPlayers] = useState<Record<string, PlayerInfo>>({});
 
   const updateAccessToken = useCallback(() => {
@@ -71,20 +72,19 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
         },
       };
 
-      fetch(
+      return fetch(
         `https://cloud.seatable.io/api-gateway/api/v2/dtables/${token.dtable_uuid}/rows/?table_name=sk.synth.kitchen-plays&convert_keys=true`,
         options
       )
         .then((res) => res.json())
         .then((res) => {
-          setPlayers(
-            Object.fromEntries(
-              res.rows.map((row: any) => [
-                row.Name,
-                { id: row._id, plays: row.plays },
-              ])
-            )
+          playersRef.current = Object.fromEntries(
+            res.rows.map((row: any) => [
+              row.Name,
+              { id: row._id, plays: row.plays },
+            ])
           );
+          setPlayers(playersRef.current);
         })
         .catch((err) => console.error(err));
     }
@@ -105,35 +105,37 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
         return;
       }
 
-      const options = {
-        method: "PUT",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          authorization: `Bearer ${token.access_token}`,
-        },
-        body: JSON.stringify({
-          table_name: "sk.synth.kitchen-plays",
-          updates: [
-            {
-              row: { plays: `${players[name].plays + 1}` },
-              row_id: players[name].id,
-            },
-          ],
-        }),
-      };
+      updatePlayerInfo()?.finally(() => {
+        const options = {
+          method: "PUT",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            authorization: `Bearer ${token.access_token}`,
+          },
+          body: JSON.stringify({
+            table_name: "sk.synth.kitchen-plays",
+            updates: [
+              {
+                row: { plays: `${playersRef.current[name].plays + 1}` },
+                row_id: playersRef.current[name].id,
+              },
+            ],
+          }),
+        };
 
-      fetch(
-        `https://cloud.seatable.io/api-gateway/api/v2/dtables/${token.dtable_uuid}/rows/`,
-        options
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.success) {
-            updatePlayerInfo();
-          }
-        })
-        .catch((err) => console.error(err));
+        fetch(
+          `https://cloud.seatable.io/api-gateway/api/v2/dtables/${token.dtable_uuid}/rows/`,
+          options
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.success) {
+              updatePlayerInfo();
+            }
+          })
+          .catch((err) => console.error(err));
+      });
     },
     [token, players, updatePlayerInfo]
   );
