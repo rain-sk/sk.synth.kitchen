@@ -17,6 +17,14 @@ export const Links: React.FC = () => (
       </a>
       <a
         className="link"
+        href="https://sksksk.bandcamp.com/follow_me"
+        target="_blank"
+      >
+        <i className="fab fa-bandcamp">&nbsp;</i>
+        <p>Follow Sk on Bandcamp</p>
+      </a>
+      <a
+        className="link"
         href="https://soundcloud.com/sk-rain/sets/eclat-crew"
         target="_blank"
       >
