@@ -38,9 +38,9 @@ export const Releases: React.FC = () => (
         <p>
           Sk's debut EP, featuring a diverse range of genres and styles that
           have captured their imagination. From minimal/ambient house to "sound
-          fields", Fields is an eclectic journey into the sonic landscapes that
-          inspire Sk. Through this release, Sk invites listeners to explore the
-          interplay between music and environment.
+          fields", Fields is a journey into the sonic landscapes that inspire
+          Sk. Listeners are invited to explore the interplay between music and
+          environment.
         </p>
       </article>
     </div>
