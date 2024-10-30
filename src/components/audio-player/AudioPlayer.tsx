@@ -54,13 +54,61 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
     clearAnimation();
   }, [clearAnimation, players, playing, streamId]);
 
-  const onMouseDown = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onClickPlayer = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (
+        buttonRef.current &&
+        e.target &&
+        buttonRef.current.contains(e.target as HTMLElement)
+      ) {
+        return;
+      }
+      const eventX = e.screenX;
+      const elementRect = (e.target as HTMLDivElement).getBoundingClientRect();
+      const left = elementRect.x;
+      const right = left + elementRect.width;
+
+      const newPosition = (eventX - left) / (right - left);
+
+      setPosition(streamId, newPosition);
+    },
+    [setPosition, streamId]
+  );
+
+  type DragStartEvent<HTMLElementType> =
+    | {
+        type: "mouse";
+        event: React.MouseEvent<HTMLElementType>;
+      }
+    | {
+        type: "touch";
+        event: React.TouchEvent<HTMLElementType>;
+      };
+
+  const onDragStart = useCallback(
+    (e: DragStartEvent<HTMLButtonElement>) => {
+      const isMouseEvent = e.type === "mouse";
+
+      if (!isMouseEvent) {
+        e.event.preventDefault();
+      }
+      e.event.stopPropagation();
+
+      const screenX = (
+        e: React.MouseEvent | MouseEvent | React.TouchEvent | TouchEvent
+      ) => {
+        return isMouseEvent
+          ? (e as React.MouseEvent | MouseEvent).screenX
+          : Array.from((e as React.TouchEvent | TouchEvent).touches).find(
+              (touch) => touch.target === buttonRef.current
+            )?.screenX ?? 0;
+      };
+
       if (buttonRef.current) {
         clearAnimation();
 
         draggingRef.current = false;
-        dragPositionRef.current = e.screenX;
+        dragPositionRef.current = screenX(e.event);
 
         const setButtonPosition = (screenX: number) => {
           if (
@@ -101,14 +149,20 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
           }
         };
 
-        const onMouseMove = (e: MouseEvent) => {
-          draggingRef.current = true;
-          setButtonPosition(e.screenX);
+        const onDrag = (e: MouseEvent | TouchEvent) => {
+          const dragX = screenX(e);
+          if (!draggingRef.current && dragPositionRef.current !== undefined) {
+            draggingRef.current = Math.abs(dragX - dragPositionRef.current) > 1;
+            console.log(dragX, dragPositionRef.current, draggingRef.current);
+          }
+          if (draggingRef.current) {
+            setButtonPosition(dragX);
+          }
         };
 
-        const onMouseUp = (e: MouseEvent) => {
+        const onDragEnd = (e: MouseEvent | TouchEvent) => {
           if (draggingRef.current) {
-            setButtonPosition(e.screenX);
+            setButtonPosition(screenX(e));
             seekToButtonPosition();
           } else {
             if (playing) {
@@ -119,17 +173,63 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
           }
 
           dragPositionRef.current = undefined;
-          document.body.removeEventListener("mouseup", onMouseUp);
-          document.body.removeEventListener("mousemove", onMouseMove);
+          document.body.removeEventListener(
+            isMouseEvent ? "mouseup" : "touchend",
+            onDragEnd
+          );
+          document.body.removeEventListener(
+            isMouseEvent ? "mousemove" : "touchmove",
+            onDrag
+          );
 
           draggingRef.current = false;
         };
 
-        document.body.addEventListener("mouseup", onMouseUp);
-        document.body.addEventListener("mousemove", onMouseMove);
+        document.body.addEventListener(
+          isMouseEvent ? "mouseup" : "touchend",
+          onDragEnd
+        );
+        document.body.addEventListener(
+          isMouseEvent ? "mousemove" : "touchmove",
+          onDrag
+        );
+
+        if (!isMouseEvent) {
+          document.body.addEventListener("touchcancel", onDragEnd);
+        }
       }
     },
-    [buttonRef, clearAnimation, pause, play, playing, setPosition, streamId]
+    [
+      buttonRef,
+      draggingRef,
+      dragPositionRef,
+      clearAnimation,
+      pause,
+      play,
+      playing,
+      setPosition,
+      streamId,
+    ]
+  );
+
+  const onMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      onDragStart({
+        type: "mouse",
+        event: e,
+      });
+    },
+    [onDragStart]
+  );
+
+  const onTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLButtonElement>) => {
+      onDragStart({
+        type: "touch",
+        event: e,
+      });
+    },
+    [onDragStart]
   );
 
   const onKeyDown = useCallback(
@@ -169,10 +269,11 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
   }, [calcLeft, setLeft, draggingButtonPosition, playerPosition]);
 
   return initialized ? (
-    <div className="player">
+    <div className="player" onClick={onClickPlayer}>
       <button
         type="button"
         onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
         onKeyDown={onKeyDown}
         ref={(button) => {
           buttonRef.current = button ?? undefined;
