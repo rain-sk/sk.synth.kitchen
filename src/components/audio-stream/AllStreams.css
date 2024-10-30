@@ -9,7 +9,7 @@ article {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 0 0.5rem 1rem;
   padding: 0.4rem;
