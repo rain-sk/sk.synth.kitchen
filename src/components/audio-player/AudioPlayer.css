@@ -18,3 +18,7 @@
 .player > button:focus {
   border: 1px solid #fff;
 }
+
+.player svg[data-icon=play] {
+  padding-left: 2px;
+}
