@@ -150,7 +150,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
   );
 
   const calcLeft = useCallback(() => {
-    return draggingButtonPosition
+    return draggingButtonPosition !== undefined
       ? `${draggingButtonPosition}px`
       : buttonRef.current &&
         buttonRef.current.parentElement &&
