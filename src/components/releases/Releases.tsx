@@ -14,14 +14,16 @@ export const Releases: React.FC = () => (
           src="https://bandcamp.com/EmbeddedPlayer/album=820312149/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/"
           seamless
         >
-          <a href="https://sksksk.bandcamp.com/album/zela">Zela by Sk</a>
+          <a href="https://sk-rain.bandcamp.com/album/zela">
+            Zela by Sk [Rain]
+          </a>
         </iframe>
         <p>
           A sonic journey that combines elements of techno, house, and
           experimental electronics. Each track blends into the next, creating a
           narrative arc that draws listeners in from start to finish. Zela
-          represents a natural progression for Sk as an artist, showcasing the
-          evolution of their creative vision.
+          represents a natural progression for Sk [Rain] as an artist,
+          showcasing the evolution of their creative vision.
         </p>
       </article>
       <article>
@@ -33,14 +35,16 @@ export const Releases: React.FC = () => (
           src="https://bandcamp.com/EmbeddedPlayer/album=906746429/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/"
           seamless
         >
-          <a href="https://sksksk.bandcamp.com/album/fields">Fields by Sk</a>
+          <a href="https://sk-rain.bandcamp.com/album/fields">
+            Fields by Sk [Rain]
+          </a>
         </iframe>
         <p>
-          Sk's debut EP, featuring a diverse range of genres and styles that
-          have captured their imagination. From minimal/ambient house to "sound
-          fields", Fields is a journey into the sonic landscapes that inspire
-          Sk. Listeners are invited to explore the interplay between music and
-          environment.
+          Sk [Rain]'s debut EP, featuring a diverse range of genres and styles
+          that have captured their imagination. From minimal/ambient house to
+          "sound fields", Fields is a journey into the sonic landscapes that
+          inspire Sk [Rain]. Listeners are invited to explore the interplay
+          between music and environment.
         </p>
       </article>
     </div>

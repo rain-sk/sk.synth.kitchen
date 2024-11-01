@@ -4,12 +4,13 @@ export const Bio: React.FC = () => (
   <section>
     <h2>about</h2>
     <p>
-      Sk is a producer, DJ, and music technologist based in Berlin. Their music
-      spans the range of experimental/IDM to club-oriented house and techno.
+      Sk [Rain] is a producer, DJ, and music technologist based in Berlin. Their
+      music spans the range of experimental/IDM to club-oriented house and
+      techno.
     </p>
     <p>
       When they aren't doing music or working as a product leader at Ableton, Sk
-      is active with{" "}
+      [Rain] is active with{" "}
       <a href="https://eclatcrew.com" target="_blank">
         Éclat Crew
       </a>{" "}
@@ -29,8 +30,8 @@ export const Bio: React.FC = () => (
       sound design.
     </p>
     <p>
-      Currently Sk is focusing on some soon-to-be-released collaborations and a
-      few other fun things.
+      Currently Sk [Rain] is focusing on some soon-to-be-released collaborations
+      and a few other fun things.
     </p>
   </section>
 );

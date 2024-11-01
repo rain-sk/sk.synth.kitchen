@@ -17,11 +17,11 @@ export const Links: React.FC = () => (
       </a>
       <a
         className="link"
-        href="https://sksksk.bandcamp.com/follow_me"
+        href="https://sk-rain.bandcamp.com/follow_me"
         target="_blank"
       >
         <i className="fab fa-bandcamp">&nbsp;</i>
-        <p>Follow Sk on Bandcamp</p>
+        <p>Follow Sk [Rain] on Bandcamp</p>
       </a>
       <a
         className="link"
@@ -30,7 +30,7 @@ export const Links: React.FC = () => (
       >
         <i className="fab fa-soundcloud">&nbsp;</i>
         <span className="visually-hidden">SoundCloud</span>
-        <p>Sk's tracks from Éclat Crew</p>
+        <p>Sk [Rain]'s tracks from Éclat Crew</p>
       </a>
       <a
         className="link"
@@ -60,7 +60,7 @@ export const Links: React.FC = () => (
           </a>
         </li>
         <li>
-          <a href="https://sksksk.bandcamp.com/music" target="_blank">
+          <a href="https://sk-rain.bandcamp.com/music" target="_blank">
             <i className="fab fa-bandcamp">&nbsp;</i>
             <span className="visually-hidden">Bandcamp</span>
           </a>

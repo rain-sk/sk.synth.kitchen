@@ -9,7 +9,7 @@ export const Header: React.FC = () => (
 
     <div>
       <h1>
-        <Link to="/">Sk</Link>
+        <Link to="/">Sk [Rain]</Link>
       </h1>
       <p>Producer | DJ | Music&nbsp;Technologist</p>
       <p>
