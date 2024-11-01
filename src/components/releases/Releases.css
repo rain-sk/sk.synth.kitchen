@@ -1,7 +1,12 @@
 div.releases {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+}
+
+div.releases article {
+  flex-basis: calc(50% - 2rem);
 }
 
 div.releases iframe {
