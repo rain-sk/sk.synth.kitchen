@@ -22,3 +22,31 @@ nav h1, nav p {
   color: #fff;
   margin: 0.5rem 0;
 }
+
+nav h1 a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% + 0.75rem);
+  text-decoration: none;
+  position: relative;
+  right: 0.75rem;
+}
+
+@media screen and (max-width: 450px) {
+  nav h1 a {
+      flex-direction: column;
+      align-items: end;
+  }
+}
+
+nav h1 a:hover,nav h1 a:active,nav h1 a:focus {
+  text-decoration: underline;
+}
+
+nav h1 a > span:nth-child(2)
+{
+  font-size: 50%;
+  text-decoration:none!important;
+}

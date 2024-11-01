@@ -6,3 +6,10 @@
   border-radius: 50%;
   -webkit-tap-highlight-color: transparent;
 }
+
+@media screen and (max-width: 400px) {
+  #profilePicture img {
+      width: calc(200px - (400px - 100vw) / 2);
+      height: calc(200px - (400px - 100vw) / 2);
+  }
+}
