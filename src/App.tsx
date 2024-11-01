@@ -1,5 +1,5 @@
 import React from "react";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { Error } from "./routes/error";
 import { Root } from "./routes/root";
@@ -10,7 +10,7 @@ import { Home } from "./routes/home";
 import { AudioPlayerContextProvider } from "./contexts/audio-player";
 import { PlayerApiContextProvider } from "./contexts/plays-api";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
