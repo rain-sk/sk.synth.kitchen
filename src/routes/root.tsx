@@ -5,7 +5,7 @@ import { Header } from "../components/header/Header";
 import { ParallaxBackground } from "../components/parallax-background/ParallaxBackground";
 import { NowPlaying } from "../components/now-playing/NowPlaying";
 
-export const Root: React.FC = () => {
+export const RootRoute: React.FC = () => {
   return (
     <>
       <ParallaxBackground />

@@ -1,28 +1,38 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Error } from "./routes/error";
-import { Root } from "./routes/root";
-import { Stream } from "./routes/stream";
+import { ErrorRoute } from "./routes/error";
+import { RootRoute } from "./routes/root";
+import { StreamRoute } from "./routes/stream";
 
 import "./App.css";
-import { Home } from "./routes/home";
+import { HomeRoute } from "./routes/home";
 import { AudioPlayerContextProvider } from "./contexts/audio-player";
 import { PlayerApiContextProvider } from "./contexts/plays-api";
+import { ReleasesRoute } from "./routes/releases";
+import { ReleaseRoute } from "./routes/release";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    errorElement: <Error />,
+    element: <RootRoute />,
+    errorElement: <ErrorRoute />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <HomeRoute />,
       },
       {
         path: "stream/:streamId",
-        element: <Stream />,
+        element: <StreamRoute />,
+      },
+      {
+        path: "releases/",
+        element: <ReleasesRoute />,
+      },
+      {
+        path: "release/:releaseId",
+        element: <ReleaseRoute />,
       },
     ],
   },

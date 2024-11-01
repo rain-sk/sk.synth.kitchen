@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { getStream } from "../streams";
+import { getStream } from "../data/streams";
 import { PlayerApiContext } from "./plays-api";
 
 type AudioState = Record<string, HTMLAudioElement>;

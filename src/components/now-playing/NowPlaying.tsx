@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./NowPlaying.css";
 import { AudioPlayerContext } from "../../contexts/audio-player";
 import { Link } from "react-router-dom";
-import { streamsMap } from "../../streams";
+import { streamsMap } from "../../data/streams";
 
 export const NowPlaying: React.FC = () => {
   const { activeStreamId } = useContext(AudioPlayerContext);

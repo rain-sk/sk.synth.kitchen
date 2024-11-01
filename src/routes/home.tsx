@@ -3,13 +3,13 @@ import React from "react";
 import { Releases } from "../components/releases/Releases";
 import { Bio } from "../components/bio/Bio";
 import { Links } from "../components/links/Links";
-import { AllStreams } from "../components/audio-stream/AllStreams";
+import { Streams } from "../components/audio-stream/Streams";
 
-export const Home: React.FC = () => {
+export const HomeRoute: React.FC = () => {
   return (
     <main>
-      <Releases />
-      <AllStreams />
+      <Releases abbreviated />
+      <Streams />
       <Bio />
       <Links />
     </main>

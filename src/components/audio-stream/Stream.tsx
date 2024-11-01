@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AudioPlayer } from "../audio-player/AudioPlayer";
-import "./AudioStream.css";
-import { streamsMap } from "../../streams";
+import "./Stream.css";
+import { streamsMap } from "../../data/streams";
 
 // import { PlayerApiContext } from "../../contexts/plays-api";
 // import { faPlay } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,6 @@ export const AudioStream: React.FC<StreamProps> = ({
   title,
   tracklist,
 }) => {
-  // const { players } = useContext(PlayerApiContext);
   return (
     <>
       <header>

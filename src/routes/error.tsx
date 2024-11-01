@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouteError } from "react-router-dom";
 
-export const Error: React.FC = () => {
+export const ErrorRoute: React.FC = () => {
   const error = useRouteError();
   console.error(error);
 

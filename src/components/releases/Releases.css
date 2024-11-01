@@ -5,24 +5,6 @@ div.releases {
   justify-content: space-between;
 }
 
-div.releases article {
-  flex-basis: calc(50% - 2rem);
-}
-
-div.releases iframe {
-  border: none;
-  width: calc((675px / 2) - 2rem);
-  height: 42px;
-  margin: 0.5rem 0 0;
-}
-
-div.releases article p {
-  margin: 0.5rem 0 0;
-  text-align: left;
-  font-size: 10pt;
-  display: inline-block;
-}
-
 @media screen and (max-width: 700px) {
   div.releases {
     flex-direction: column;
@@ -32,8 +14,10 @@ div.releases article p {
   div.releases article {
     margin: 0 0.5rem 1rem;
   }
+}
 
-  div.releases iframe {
-    width: calc(100vw - 3rem);
-  }
+a.releases-link {
+  text-align: right;
+  display: inherit;
+  margin: 0.5rem;
 }

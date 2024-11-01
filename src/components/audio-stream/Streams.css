@@ -18,7 +18,22 @@ article {
   -webkit-tap-highlight-color: transparent;
 }
 
-section > header, article > header {
+section > header {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+}
+
+section > header > a:nth-child(2) {
+  position: absolute;
+  right: 1rem;
+  font-size: 1rem;
+  top: 50%;
+}
+
+article > header {
   display: flex;
   justify-content: space-between;
   align-items: center;
