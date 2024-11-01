@@ -85,14 +85,21 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         event: React.TouchEvent<HTMLElementType>;
       };
 
+  const touchRef = useRef<boolean>(false);
   const onDragStart = useCallback(
     (e: DragStartEvent<HTMLButtonElement>) => {
       const isMouseEvent = e.type === "mouse";
-
       if (!isMouseEvent) {
         e.event.preventDefault();
+        e.event.stopPropagation();
+      } else if (touchRef.current) {
+        setTimeout(() => {
+          touchRef.current = false;
+        }, 10);
+        return;
       }
-      e.event.stopPropagation();
+
+      touchRef.current = !isMouseEvent;
 
       const screenX = (
         e: React.MouseEvent | MouseEvent | React.TouchEvent | TouchEvent
@@ -150,6 +157,11 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         };
 
         const onDrag = (e: MouseEvent | TouchEvent) => {
+          if (isMouseEvent) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
           const dragX = screenX(e);
           if (!draggingRef.current && dragPositionRef.current !== undefined) {
             draggingRef.current = Math.abs(dragX - dragPositionRef.current) > 1;
