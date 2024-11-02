@@ -1,15 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeadphonesSimple,
-  faWaveSquare,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faBandcamp,
-  faInstagram,
-  faSoundcloud,
-  faSpotify,
-} from "@fortawesome/free-brands-svg-icons";
+import { faBandcamp } from "@fortawesome/free-brands-svg-icons/faBandcamp";
+import { faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons/faHeadphonesSimple";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
+import { faSoundcloud } from "@fortawesome/free-brands-svg-icons/faSoundcloud";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons/faSpotify";
+import { faWaveSquare } from "@fortawesome/free-solid-svg-icons/faWaveSquare";
 
 import { SocialLinks } from "../social-links/SocialLinks";
 import "./Links.css";
