@@ -5,9 +5,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { AudioPlayerContext } from "../../contexts/audio-player";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPause } from "@fortawesome/free-solid-svg-icons/faPause";
+import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
+
+import { AudioPlayerContext } from "../../contexts/audio-player";
 
 import "./AudioPlayer.css";
 

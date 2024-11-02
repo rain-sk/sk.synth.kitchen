@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faApple,
-  faSpotify,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons/faApple";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons/faSpotify";
+import { faYoutube } from "@fortawesome/free-brands-svg-icons/faYoutube";
 
 import { SocialLinkInfo } from "../components/social-links/SocialLinks";
 
