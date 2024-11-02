@@ -79,10 +79,12 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
         .then((res) => res.json())
         .then((res) => {
           playersRef.current = Object.fromEntries(
-            res.rows.map((row: any) => [
-              row.Name,
-              { id: row._id, plays: row.plays },
-            ])
+            res.rows.map(
+              (row: { _id: string; Name: string; plays: number }) => [
+                row.Name,
+                { id: row._id, plays: row.plays },
+              ]
+            )
           );
           setPlayers(playersRef.current);
         })

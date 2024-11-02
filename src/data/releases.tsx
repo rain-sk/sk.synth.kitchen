@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SocialLinkInfo } from "../components/social-links/SocialLinks";
 
 export type ReleaseData = {

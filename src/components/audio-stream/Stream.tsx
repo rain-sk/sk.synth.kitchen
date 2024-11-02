@@ -2,11 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AudioPlayer } from "../audio-player/AudioPlayer";
 import "./Stream.css";
-import { StreamInfo, streamsMap } from "../../data/streams";
-
-// import { PlayerApiContext } from "../../contexts/plays-api";
-// import { faPlay } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { StreamInfo } from "../../data/streams";
 
 type StreamProps = StreamInfo & {
   abbreviated?: boolean;
