@@ -8,9 +8,12 @@ ul.socials {
 
 ul.socials li {
   width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-ul.socials svg, ul.socials i.fab {
+ul.socials svg, ul.socials svg.svg-inline--fa {
   height: 1rem;
 }
 

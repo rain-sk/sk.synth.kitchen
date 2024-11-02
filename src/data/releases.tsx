@@ -1,3 +1,10 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faApple,
+  faSpotify,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+
 import { SocialLinkInfo } from "../components/social-links/SocialLinks";
 
 export type ReleaseData = {
@@ -20,17 +27,17 @@ export const releases: ReleaseData[] = [
     streams: [
       {
         text: "spotify",
-        icon: <i className="fab fa-spotify">&nbsp;</i>,
+        icon: <FontAwesomeIcon icon={faSpotify} />,
         url: "https://open.spotify.com/track/43uW9HmJwcTvObyrT7ehrK",
       },
       {
         text: "apple music",
-        icon: <i className="fab fa-apple">&nbsp;</i>,
+        icon: <FontAwesomeIcon icon={faApple} />,
         url: "https://music.apple.com/us/album/do-it-again-sk-remix/1775954301?i=1775954303",
       },
       {
         text: "youtube",
-        icon: <i className="fab fa-youtube">&nbsp;</i>,
+        icon: <FontAwesomeIcon icon={faYoutube} />,
         url: "https://music.youtube.com/watch?v=-6T0om9pgdM",
       },
       {
