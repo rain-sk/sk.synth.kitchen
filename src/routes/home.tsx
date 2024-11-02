@@ -9,7 +9,7 @@ export const HomeRoute: React.FC = () => {
   return (
     <main>
       <Releases abbreviated />
-      <Streams />
+      <Streams abbreviated />
       <Bio />
       <Links />
     </main>

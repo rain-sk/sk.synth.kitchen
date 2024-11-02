@@ -13,8 +13,8 @@ export const Releases: React.FC<{ abbreviated?: boolean }> = ({
       <header>
         <h2>releases</h2>
         {abbreviated && (
-          <Link to="/releases" className="releases-link">
-            See all<span className="visually-hidden"> releases</span>
+          <Link to="/releases">
+            see all<span className="visually-hidden"> releases</span>
           </Link>
         )}
       </header>

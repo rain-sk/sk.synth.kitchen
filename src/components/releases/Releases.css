@@ -15,9 +15,3 @@ div.releases {
     margin: 0 0.5rem 1rem;
   }
 }
-
-a.releases-link {
-  text-align: right;
-  display: inherit;
-  margin: 0.5rem;
-}

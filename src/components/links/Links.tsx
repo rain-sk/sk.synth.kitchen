@@ -5,6 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Links.css";
+import { SocialLinks } from "../social-links/SocialLinks";
 
 export const Links: React.FC = () => (
   <>
@@ -32,11 +33,7 @@ export const Links: React.FC = () => (
         <span className="visually-hidden">SoundCloud</span>
         <p>Sk [Rain]'s tracks from Éclat Crew</p>
       </a>
-      <a
-        className="link"
-        href="https://soundcloud.com/sk-rain/sets/eclat-crew"
-        target="_blank"
-      >
+      <a className="link" href="https://eclatcrew.com" target="_blank">
         <FontAwesomeIcon icon={faHeadphonesSimple} />
         <p>The Éclat Crew Website</p>
       </a>
@@ -51,36 +48,30 @@ export const Links: React.FC = () => (
     </section>
     <section>
       <h2>find me on</h2>
-
-      <ul className="socials">
-        <li>
-          <a href="https://www.instagram.com/sk_rain_/" target="_blank">
-            <i className="fab fa-instagram">&nbsp;</i>
-            <span className="visually-hidden">Instagram</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://sk-rain.bandcamp.com/music" target="_blank">
-            <i className="fab fa-bandcamp">&nbsp;</i>
-            <span className="visually-hidden">Bandcamp</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://soundcloud.com/sk-rain" target="_blank">
-            <i className="fab fa-soundcloud">&nbsp;</i>
-            <span className="visually-hidden">SoundCloud</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ"
-            target="_blank"
-          >
-            <i className="fab fa-spotify">&nbsp;</i>
-            <span className="visually-hidden">Spotify</span>
-          </a>
-        </li>
-      </ul>
+      <SocialLinks
+        links={[
+          {
+            url: "https://www.instagram.com/sk_rain_/",
+            icon: <i className="fab fa-instagram">&nbsp;</i>,
+            text: "Instagram",
+          },
+          {
+            url: "https://sk-rain.bandcamp.com/music",
+            icon: <i className="fab fa-bandcamp">&nbsp;</i>,
+            text: "Bandcamp",
+          },
+          {
+            url: "https://soundcloud.com/sk-rain",
+            icon: <i className="fab fa-soundcloud">&nbsp;</i>,
+            text: "SoundCloud",
+          },
+          {
+            url: "https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ",
+            icon: <i className="fab fa-spotify">&nbsp;</i>,
+            text: "Spotify",
+          },
+        ]}
+      />
     </section>
   </>
 );

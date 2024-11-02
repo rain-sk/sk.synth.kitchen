@@ -4,6 +4,7 @@ import { AudioStream } from "../components/audio-stream/Stream";
 import { getStream } from "../data/streams";
 import { ErrorRoute } from "./error";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type RouteParams = {
   streamId?: string;
@@ -25,14 +26,13 @@ export const StreamRoute: React.FC = () => {
   return (
     <main>
       <section>
-        <article>
-          <AudioStream
-            expanded={true}
-            streamId={stream.streamId}
-            title={stream.title}
-            tracklist={stream.tracklist}
-          />
-        </article>
+        <header>
+          <h2>dj set</h2>
+          <Link to="/streams">
+            see all<span className="visually-hidden"> dj sets</span>
+          </Link>
+        </header>
+        <AudioStream key={stream.streamId} {...stream} />
       </section>
     </main>
   );

@@ -11,6 +11,7 @@ import { AudioPlayerContextProvider } from "./contexts/audio-player";
 import { PlayerApiContextProvider } from "./contexts/plays-api";
 import { ReleasesRoute } from "./routes/releases";
 import { ReleaseRoute } from "./routes/release";
+import { StreamsRoute } from "./routes/streams";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomeRoute />,
+      },
+      {
+        path: "streams",
+        element: <StreamsRoute />,
       },
       {
         path: "stream/:streamId",
