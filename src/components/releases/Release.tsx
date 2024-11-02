@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 
 import { ReleaseData } from "../../data/releases";
 
@@ -13,7 +13,7 @@ export const Release: React.FC<{ release: ReleaseData; full?: boolean }> = ({
     <article className={`release${full ? " full" : ""}`}>
       <header>
         <h3>
-          <Link to={`/release/${id}`}>{title}</Link>
+          <Link href={`/release/${id}`}>{title}</Link>
         </h3>
         <aside>{aside}</aside>
       </header>

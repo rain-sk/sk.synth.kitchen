@@ -1,26 +1,18 @@
 import React from "react";
+import { Link, Redirect } from "wouter";
 
 import { AudioStream } from "../components/audio-stream/Stream";
 import { getStream } from "../data/streams";
-import { ErrorRoute } from "./error";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 
-type RouteParams = {
-  streamId?: string;
+type StreamRouteProps = {
+  streamId: string;
 };
 
-export const StreamRoute: React.FC = () => {
-  const { streamId } = useParams<RouteParams>();
-
-  if (!streamId) {
-    return <ErrorRoute />;
-  }
-
+export const StreamRoute: React.FC<StreamRouteProps> = ({ streamId }) => {
   const stream = getStream(streamId);
 
   if (!stream) {
-    return <ErrorRoute />;
+    return <Redirect to="/404" />;
   }
 
   return (
@@ -28,7 +20,7 @@ export const StreamRoute: React.FC = () => {
       <section>
         <header>
           <h2>dj set</h2>
-          <Link to="/streams">
+          <Link href="/streams">
             see all<span className="visually-hidden"> dj sets</span>
           </Link>
         </header>

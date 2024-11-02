@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
+
 import { AudioPlayer } from "../audio-player/AudioPlayer";
-import "./Stream.css";
 import { StreamInfo } from "../../data/streams";
+
+import "./Stream.css";
 
 type StreamProps = StreamInfo & {
   abbreviated?: boolean;
@@ -19,7 +21,7 @@ export const AudioStream: React.FC<StreamProps> = ({
     <article>
       <header>
         <h3>
-          <Link to={`/stream/${streamId}`}>{title}</Link>
+          <Link href={`/stream/${streamId}`}>{title}</Link>
         </h3>
         <aside>{info}</aside>
       </header>

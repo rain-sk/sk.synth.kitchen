@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "wouter";
 
 import { AudioStream } from "./Stream";
 import { streams } from "../../data/streams";
+
 import "./Streams.css";
-import { Link } from "react-router-dom";
 
 export const Streams: React.FC<{ abbreviated?: boolean }> = ({
   abbreviated,
@@ -14,7 +15,7 @@ export const Streams: React.FC<{ abbreviated?: boolean }> = ({
       <header>
         <h2>dj sets</h2>
         {abbreviated && (
-          <Link to="streams">
+          <Link href="streams">
             see all<span className="visually-hidden"> dj sets</span>
           </Link>
         )}

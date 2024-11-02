@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import "./NowPlaying.css";
+import { Link } from "wouter";
+
 import { AudioPlayerContext } from "../../contexts/audio-player";
-import { Link } from "react-router-dom";
 import { streamsMap } from "../../data/streams";
+
+import "./NowPlaying.css";
 
 export const NowPlaying: React.FC = () => {
   const { activeStreamId } = useContext(AudioPlayerContext);
@@ -10,7 +12,7 @@ export const NowPlaying: React.FC = () => {
     <aside className="now-playing">
       <p>
         now playing:{" "}
-        <Link to={`/stream/${activeStreamId}`}>
+        <Link href={`/stream/${activeStreamId}`}>
           {streamsMap[activeStreamId].title}
         </Link>
       </p>

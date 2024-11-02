@@ -2,27 +2,19 @@ import React from "react";
 
 import { Release } from "../components/releases/Release";
 
-import { ErrorRoute } from "./error";
-import { useParams } from "react-router-dom";
 import { getRelease } from "../data/releases";
-import { Link } from "react-router-dom";
 import { SocialLinks } from "../components/social-links/SocialLinks";
+import { Link, Redirect } from "wouter";
 
-type RouteParams = {
-  releaseId?: string;
+type ReleaseRouteProps = {
+  releaseId: string;
 };
 
-export const ReleaseRoute: React.FC = () => {
-  const { releaseId } = useParams<RouteParams>();
-
-  if (!releaseId) {
-    return <ErrorRoute />;
-  }
-
+export const ReleaseRoute: React.FC<ReleaseRouteProps> = ({ releaseId }) => {
   const release = getRelease(releaseId);
 
   if (!release) {
-    return <ErrorRoute />;
+    return <Redirect to="/404" />;
   }
 
   return (
@@ -30,7 +22,7 @@ export const ReleaseRoute: React.FC = () => {
       <section>
         <header>
           <h2>release</h2>
-          <Link to="/releases">see all</Link>
+          <Link href="/releases">see all</Link>
         </header>
         <Release key={release.title} release={release} full />
       </section>

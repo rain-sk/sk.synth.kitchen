@@ -1,8 +1,10 @@
 import React from "react";
-import "./Releases.css";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
+
 import { releases } from "../../data/releases";
 import { Release } from "./Release";
+
+import "./Releases.css";
 
 export const Releases: React.FC<{ abbreviated?: boolean }> = ({
   abbreviated,
@@ -13,7 +15,7 @@ export const Releases: React.FC<{ abbreviated?: boolean }> = ({
       <header>
         <h2>releases</h2>
         {abbreviated && (
-          <Link to="/releases">
+          <Link href="/releases">
             see all<span className="visually-hidden"> releases</span>
           </Link>
         )}

@@ -1,7 +1,9 @@
 import React from "react";
-import "./Header.css";
+import { Link } from "wouter";
+
 import { ProfilePicture } from "./ProfilePicture";
-import { Link } from "react-router-dom";
+
+import "./Header.css";
 
 export const Header: React.FC = () => (
   <nav>
@@ -9,7 +11,7 @@ export const Header: React.FC = () => (
 
     <div>
       <h1>
-        <Link to="/">
+        <Link href="/">
           <span>Sk</span>
           <span>[Rain]</span>
         </Link>
