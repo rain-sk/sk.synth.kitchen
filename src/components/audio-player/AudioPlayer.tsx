@@ -255,10 +255,27 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         } else {
           play(streamId);
         }
-      } else if (e.code === "ArrowRight") {
-        players[streamId].currentTime += 5;
-      } else if (e.code === "ArrowLeft") {
-        players[streamId].currentTime -= 5;
+      } else {
+        const seek = (time: number) => {
+          if (players[streamId].ref.current) {
+            players[streamId].ref.current.seekTo(
+              Math.max(
+                0,
+                Math.min(players[streamId].ref.current.getDuration(), time)
+              ),
+              "seconds"
+            );
+          }
+        };
+        if (e.code === "ArrowRight") {
+          if (players[streamId].ref.current) {
+            seek(players[streamId].ref.current.getCurrentTime() + 5);
+          }
+        } else if (e.code === "ArrowLeft") {
+          if (players[streamId].ref.current) {
+            seek(players[streamId].ref.current.getCurrentTime() - 5);
+          }
+        }
       }
     },
     [pause, play, players, playing, streamId]

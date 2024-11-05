@@ -5,14 +5,20 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { getStream } from "../data/streams";
+import ReactDOM from "react-dom/client";
+import { getStream, StreamInfo } from "../data/streams";
 import { PlayerApiContext } from "./plays-api";
+import ReactPlayer from "react-player/file";
 
-type AudioState = Record<string, HTMLAudioElement>;
+type AudioState = {
+  info: StreamInfo;
+  ref: React.RefObject<ReactPlayer>;
+};
+type AudioStates = Record<string, AudioState>;
 type AudioPositionState = Record<string, number>;
 
 type AudioPlayerContextState = {
-  players: AudioState;
+  players: AudioStates;
   playerPositions: AudioPositionState;
   activeStreamId?: string;
 };
@@ -41,7 +47,7 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const activeStreamRef = useRef<string>();
   const [activeStreamId, setActiveStreamId] = useState<string>();
-  const [players, setPlayers] = useState<AudioState>({});
+  const [players, setPlayers] = useState<AudioStates>({});
   const [playerPositions, setPlayerPositions] = useState<AudioPositionState>(
     {}
   );
@@ -69,11 +75,16 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
     activeStreamRef.current = activeStreamId;
   }, [activeStreamRef, activeStreamId, incrementPlayCount]);
 
-  const startTimer = (audio: HTMLAudioElement, streamId: string) => {
+  const startTimer = (player: AudioState, streamId: string) => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
     timerRef.current = setInterval(() => {
       if (playerPositionsRef.current) {
         playerPositionsRef.current[streamId] =
-          audio.currentTime / audio.duration;
+          (player.ref.current?.getCurrentTime() ?? 0) /
+          (player.ref.current?.getDuration() ?? 1);
       }
 
       setPlayerPositions({ ...playerPositionsRef.current });
@@ -95,38 +106,59 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
         return;
       }
 
-      const audio = document.createElement("audio");
-      audio.src = stream.url;
-      audio.crossOrigin = "anonymous";
-      audio.preload = "metadata";
-      audio.id = streamId;
-      audio.onended = () => {
-        audio.currentTime = 0;
-        setActiveStreamId(undefined);
+      // todo set up the player state
+      const player = {
+        info: stream,
+        ref: React.createRef<ReactPlayer>(),
       };
-      audio.onplaying = () => {
-        startTimer(audio, streamId);
-      };
+
       const stopTimer = () => {
         if (timerRef.current !== undefined) {
           clearInterval(timerRef.current);
           timerRef.current = undefined;
         }
       };
-      audio.onpause = stopTimer;
-      audio.onerror = stopTimer;
 
-      setPlayers({
-        ...players,
-        [streamId]: audio,
-      });
-      if (!playerPositionsRef.current) {
-        playerPositionsRef.current = {};
-        playerPositionsRef.current[streamId] = 0;
-      }
-      setPlayerPositions({
-        ...playerPositionsRef.current,
-        [streamId]: 0,
+      const setupPlayer = () =>
+        new Promise<ReactPlayer>((resolve) => {
+          const container = document.createElement("div");
+          ReactDOM.createRoot(container).render(
+            <ReactPlayer
+              ref={player.ref}
+              url={player.info.url}
+              onEnded={() => {
+                player.ref.current?.seekTo(0);
+                setActiveStreamId(undefined);
+              }}
+              onPlay={() => {
+                startTimer(player, streamId);
+              }}
+              onPause={stopTimer}
+              onError={stopTimer}
+            />
+          );
+          const interval = setInterval(checkRef, 10);
+          function checkRef() {
+            if (player.ref.current) {
+              resolve(player.ref.current);
+              clearInterval(interval);
+            }
+          }
+        });
+
+      setupPlayer().then((/*reactPlayer*/) => {
+        setPlayers({
+          ...players,
+          [streamId]: player,
+        });
+        if (!playerPositionsRef.current) {
+          playerPositionsRef.current = {};
+          playerPositionsRef.current[streamId] = 0;
+        }
+        setPlayerPositions({
+          ...playerPositionsRef.current,
+          [streamId]: 0,
+        });
       });
     },
     [playerPositionsRef, players, setPlayerPositions, setPlayers]
@@ -139,9 +171,10 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
         return;
       }
 
-      players[streamId].pause();
-
-      setActiveStreamId(undefined);
+      if (players[streamId].ref.current) {
+        (players[streamId].ref.current as any).player.player.player.pause();
+        setActiveStreamId(undefined);
+      }
     },
     [players, setActiveStreamId]
   );
@@ -164,8 +197,10 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
         pause(activeStreamId);
       }
 
-      setActiveStreamId(streamId);
-      players[streamId].play();
+      if (players[streamId].ref.current) {
+        setActiveStreamId(streamId);
+        (players[streamId].ref.current as any).player.player.player.play();
+      }
     },
     [activeStreamId, pause, players, setActiveStreamId]
   );
@@ -179,8 +214,9 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
       setPlayerPositions({
         ...playerPositionsRef.current,
       });
-      if (!isNaN(players[streamId].duration)) {
-        players[streamId].currentTime = position * players[streamId].duration;
+      const player = players[streamId].ref.current;
+      if (player && !isNaN(player.getDuration())) {
+        player.seekTo(position * player.getDuration());
       }
     },
     [playerPositionsRef, players, setPlayerPositions]
