@@ -1,13 +1,38 @@
 import React from "react";
 
 import { SocialLinks } from "../social-links/SocialLinks";
-import "./Links.css";
+
 import { Plug } from "../../icons/plug";
 import { Bandcamp } from "../../icons/bandcamp";
 import { SoundCloud } from "../../icons/soundcloud";
 import { Headphones } from "../../icons/headphones";
 import { Instagram } from "../../icons/instagram";
 import { Spotify } from "../../icons/spotify";
+
+import "./Links.css";
+
+const skSocialLinks = [
+  {
+    url: "https://www.instagram.com/sk_rain_/",
+    icon: <Instagram />,
+    text: "Instagram",
+  },
+  {
+    url: "https://sk-rain.bandcamp.com/music",
+    icon: <Bandcamp />,
+    text: "Bandcamp",
+  },
+  {
+    url: "https://soundcloud.com/sk-rain",
+    icon: <SoundCloud />,
+    text: "SoundCloud",
+  },
+  {
+    url: "https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ",
+    icon: <Spotify />,
+    text: "Spotify",
+  },
+];
 
 export const Links: React.FC = () => (
   <>
@@ -50,30 +75,7 @@ export const Links: React.FC = () => (
     </section>
     <section>
       <h2>find me on</h2>
-      <SocialLinks
-        links={[
-          {
-            url: "https://www.instagram.com/sk_rain_/",
-            icon: <Instagram />,
-            text: "Instagram",
-          },
-          {
-            url: "https://sk-rain.bandcamp.com/music",
-            icon: <Bandcamp />,
-            text: "Bandcamp",
-          },
-          {
-            url: "https://soundcloud.com/sk-rain",
-            icon: <SoundCloud />,
-            text: "SoundCloud",
-          },
-          {
-            url: "https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ",
-            icon: <Spotify />,
-            text: "Spotify",
-          },
-        ]}
-      />
+      <SocialLinks links={skSocialLinks} />
     </section>
   </>
 );
