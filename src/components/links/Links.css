@@ -17,6 +17,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.link i {
+  display: flex;
+}
+
+.link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
 .link p {
   text-align: center;
   flex-grow: 1;

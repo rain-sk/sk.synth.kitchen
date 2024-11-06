@@ -23,6 +23,7 @@
   border: 1px solid #fff;
 }
 
-.player svg[data-icon=play] {
-  padding-left: 2px;
+.player svg {
+  width: 100%;
+  height: 100%;
 }

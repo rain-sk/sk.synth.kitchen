@@ -6,13 +6,11 @@ import React, {
   useState,
 } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause } from "@fortawesome/free-solid-svg-icons/faPause";
-import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
-
 import { AudioPlayerContext } from "../../contexts/audio-player";
 
 import "./AudioPlayer.css";
+import { Pause } from "../../icons/pause";
+import { Play } from "../../icons/play";
 
 type AudioPlayerProps = {
   streamId: string;
@@ -314,11 +312,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
         style={{ left }}
       >
         <span className="visually-hidden">{playing ? "pause" : "play"}</span>
-        {playing ? (
-          <FontAwesomeIcon icon={faPause} />
-        ) : (
-          <FontAwesomeIcon icon={faPlay} />
-        )}
+        {playing ? <Pause /> : <Play />}
       </button>
     </div>
   ) : null;

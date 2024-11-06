@@ -1,15 +1,13 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBandcamp } from "@fortawesome/free-brands-svg-icons/faBandcamp";
-import { faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons/faHeadphonesSimple";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
-import { faSoundcloud } from "@fortawesome/free-brands-svg-icons/faSoundcloud";
-import { faSpotify } from "@fortawesome/free-brands-svg-icons/faSpotify";
-import { faWaveSquare } from "@fortawesome/free-solid-svg-icons/faWaveSquare";
-
 import { SocialLinks } from "../social-links/SocialLinks";
 import "./Links.css";
+import { Plug } from "../../icons/plug";
+import { Bandcamp } from "../../icons/bandcamp";
+import { SoundCloud } from "../../icons/soundcloud";
+import { Headphones } from "../../icons/headphones";
+import { Instagram } from "../../icons/instagram";
+import { Spotify } from "../../icons/spotify";
 
 export const Links: React.FC = () => (
   <>
@@ -17,7 +15,7 @@ export const Links: React.FC = () => (
       <h2>linktree</h2>
 
       <a className="link" href="https://synth.kitchen" target="_blank">
-        <FontAwesomeIcon icon={faWaveSquare} />
+        <Plug />
         <p>Synth Kitchen - a web-based modular synthesizer</p>
       </a>
       <a
@@ -25,7 +23,7 @@ export const Links: React.FC = () => (
         href="https://sk-rain.bandcamp.com/follow_me"
         target="_blank"
       >
-        <FontAwesomeIcon icon={faBandcamp} />
+        <Bandcamp />
         <p>Follow Sk [Rain] on Bandcamp</p>
       </a>
       <a
@@ -33,12 +31,12 @@ export const Links: React.FC = () => (
         href="https://soundcloud.com/sk-rain/sets/eclat-crew"
         target="_blank"
       >
-        <FontAwesomeIcon icon={faSoundcloud} />
+        <SoundCloud />
         <span className="visually-hidden">SoundCloud</span>
         <p>Sk [Rain]'s tracks from Éclat Crew</p>
       </a>
       <a className="link" href="https://eclatcrew.com" target="_blank">
-        <FontAwesomeIcon icon={faHeadphonesSimple} />
+        <Headphones />
         <p>The Éclat Crew Website</p>
       </a>
       <a
@@ -46,7 +44,7 @@ export const Links: React.FC = () => (
         href="https://instagram.com/rush_berlin"
         target="_blank"
       >
-        <FontAwesomeIcon icon={faInstagram} />
+        <Instagram />
         <p>Rush on Instagram</p>
       </a>
     </section>
@@ -56,22 +54,22 @@ export const Links: React.FC = () => (
         links={[
           {
             url: "https://www.instagram.com/sk_rain_/",
-            icon: <FontAwesomeIcon icon={faInstagram} />,
+            icon: <Instagram />,
             text: "Instagram",
           },
           {
             url: "https://sk-rain.bandcamp.com/music",
-            icon: <FontAwesomeIcon icon={faBandcamp} />,
+            icon: <Bandcamp />,
             text: "Bandcamp",
           },
           {
             url: "https://soundcloud.com/sk-rain",
-            icon: <FontAwesomeIcon icon={faSoundcloud} />,
+            icon: <SoundCloud />,
             text: "SoundCloud",
           },
           {
             url: "https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ",
-            icon: <FontAwesomeIcon icon={faSpotify} />,
+            icon: <Spotify />,
             text: "Spotify",
           },
         ]}

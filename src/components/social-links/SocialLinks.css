@@ -13,8 +13,9 @@ ul.socials li {
   align-items: center;
 }
 
-ul.socials svg, ul.socials svg.svg-inline--fa {
-  height: 1rem;
+ul.socials svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 ul.socials  a {
