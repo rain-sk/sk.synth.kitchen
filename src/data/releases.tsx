@@ -58,6 +58,18 @@ export const releases: ReleaseData[] = [
     text: `A sonic journey that combines elements of techno, house, and experimental electronics. Each track blends into the next, creating a narrative arc that draws listeners in from start to finish. Zela represents a natural progression for Sk [Rain] as an artist, showcasing the evolution of their creative vision.`,
     id: "zela",
     image: zela,
+    streams: [
+      {
+        text: "spotify",
+        icon: <Spotify />,
+        url: "https://open.spotify.com/album/0GP9nXVxeKJQaTcaUBmAcl",
+      },
+      {
+        text: "youtube",
+        icon: <YouTube />,
+        url: "https://music.youtube.com/playlist?list=OLAK5uy_lF6gtn19LDQoCfLMWxncx7K9WEQPtUlRg",
+      },
+    ],
   },
   {
     title: "Fields",
