@@ -28,7 +28,7 @@ const skSocialLinks = [
     text: "SoundCloud",
   },
   {
-    url: "https://open.spotify.com/artist/4ayqL65GUwhAUvD6vGm0FJ",
+    url: "https://open.spotify.com/artist/1XIgVe3O2ohj35qCU9b7a9",
     icon: <Spotify />,
     text: "Spotify",
   },
