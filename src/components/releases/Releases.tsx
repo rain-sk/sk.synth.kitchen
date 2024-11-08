@@ -22,7 +22,7 @@ export const Releases: React.FC<{ abbreviated?: boolean }> = ({
       </header>
       <div className="releases">
         {renderedReleases.map((release) => (
-          <Release key={release.title} release={release} full={false} />
+          <Release key={release.title} release={release} />
         ))}
       </div>
     </section>

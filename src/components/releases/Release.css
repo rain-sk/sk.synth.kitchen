@@ -41,8 +41,13 @@ article.release.full section {
   display: flex;
 }
 
-article.release section  p{
+article.release section p {
   margin-top: 1rem;
+}
+
+article.release img {
+  margin-top: 0.75rem;
+  width: 100%;
 }
 
 @media screen and (max-width: 700px) {

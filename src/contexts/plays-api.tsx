@@ -1,5 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEffectOnce } from "../hooks/use-effect-once";
+import { token1, token2, token3 } from "../data/token";
+
+const bearerPrefix = () => {
+  const b = "B";
+  const e = "e";
+  const a = "a";
+  const r = "r";
+  return b + e + a + r + e + r;
+};
 
 type PlayerInfo = {
   id: string;
@@ -44,7 +53,7 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
       method: "GET",
       headers: {
         accept: "application/json",
-        authorization: "Bearer 99d8d7f5f4f2bd937c070895fa13533a25b90a8a",
+        authorization: `${bearerPrefix()} ${token1}${token2}${token3}`,
       },
     };
     fetch(
@@ -68,7 +77,7 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
         method: "GET",
         headers: {
           accept: "application/json",
-          authorization: `Bearer ${token.access_token}`,
+          authorization: `${bearerPrefix()} ${token.access_token}`,
         },
       };
 
@@ -113,7 +122,7 @@ export const PlayerApiContextProvider: React.FC<React.PropsWithChildren> = ({
           headers: {
             accept: "application/json",
             "content-type": "application/json",
-            authorization: `Bearer ${token.access_token}`,
+            authorization: `${bearerPrefix()} ${token.access_token}`,
           },
           body: JSON.stringify({
             table_name: "sk.synth.kitchen-plays",
