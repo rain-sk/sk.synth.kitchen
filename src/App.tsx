@@ -37,7 +37,6 @@ export const App: React.FC = () => (
             {(params) => <ReleaseRoute releaseId={params.releaseId} />}
           </Route>
 
-          {/* Default route in a switch */}
           <Route>
             <ErrorRoute />
           </Route>
