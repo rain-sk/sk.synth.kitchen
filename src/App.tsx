@@ -16,30 +16,34 @@ import { NowPlaying } from "./components/now-playing/NowPlaying";
 import { ParallaxBackground } from "./components/parallax-background/ParallaxBackground";
 
 import "./App.css";
+import { ScrollToTop } from "./components/scroll-to-top";
 
 export const App: React.FC = () => (
-  <PlayerApiContextProvider>
-    <AudioPlayerContextProvider>
-      <ParallaxBackground />
-      <Header />
-      <Switch>
-        <Route path="/" component={HomeRoute} />
-        <Route path="/404" component={ErrorRoute} />
-        <Route path="/streams" component={StreamsRoute} />
-        <Route path="/stream/:streamId">
-          {(params) => <StreamRoute streamId={params.streamId} />}
-        </Route>
-        <Route path="/releases" component={ReleasesRoute} />
-        <Route path="/release/:releaseId">
-          {(params) => <ReleaseRoute releaseId={params.releaseId} />}
-        </Route>
+  <>
+    <ScrollToTop />
+    <PlayerApiContextProvider>
+      <AudioPlayerContextProvider>
+        <ParallaxBackground />
+        <Header />
+        <Switch>
+          <Route path="/" component={HomeRoute} />
+          <Route path="/404" component={ErrorRoute} />
+          <Route path="/streams" component={StreamsRoute} />
+          <Route path="/stream/:streamId">
+            {(params) => <StreamRoute streamId={params.streamId} />}
+          </Route>
+          <Route path="/releases" component={ReleasesRoute} />
+          <Route path="/release/:releaseId">
+            {(params) => <ReleaseRoute releaseId={params.releaseId} />}
+          </Route>
 
-        {/* Default route in a switch */}
-        <Route>
-          <ErrorRoute />
-        </Route>
-      </Switch>
-      <NowPlaying />
-    </AudioPlayerContextProvider>
-  </PlayerApiContextProvider>
+          {/* Default route in a switch */}
+          <Route>
+            <ErrorRoute />
+          </Route>
+        </Switch>
+        <NowPlaying />
+      </AudioPlayerContextProvider>
+    </PlayerApiContextProvider>
+  </>
 );
