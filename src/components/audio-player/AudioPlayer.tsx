@@ -166,7 +166,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
           const dragX = screenX(e);
           if (!draggingRef.current && dragPositionRef.current !== undefined) {
             draggingRef.current = Math.abs(dragX - dragPositionRef.current) > 1;
-            console.log(dragX, dragPositionRef.current, draggingRef.current);
           }
           if (draggingRef.current) {
             setButtonPosition(dragX);
