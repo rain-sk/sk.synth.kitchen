@@ -65,6 +65,11 @@ export const releases: ReleaseData[] = [
         url: "https://open.spotify.com/album/0GP9nXVxeKJQaTcaUBmAcl",
       },
       {
+        text: "apple music",
+        icon: <Apple />,
+        url: "https://music.apple.com/de/album/zela-ep/1778449418?l=en-GB",
+      },
+      {
         text: "youtube",
         icon: <YouTube />,
         url: "https://music.youtube.com/playlist?list=OLAK5uy_lF6gtn19LDQoCfLMWxncx7K9WEQPtUlRg",
