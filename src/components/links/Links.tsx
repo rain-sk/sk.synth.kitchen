@@ -10,13 +10,9 @@ import { Instagram } from "../../icons/instagram";
 import { Spotify } from "../../icons/spotify";
 
 import "./Links.css";
+import { Apple } from "../../icons/apple";
 
 const skSocialLinks = [
-  {
-    url: "https://www.instagram.com/sk_rain_/",
-    icon: <Instagram />,
-    text: "Instagram",
-  },
   {
     url: "https://sk-rain.bandcamp.com/music",
     icon: <Bandcamp />,
@@ -28,9 +24,19 @@ const skSocialLinks = [
     text: "SoundCloud",
   },
   {
+    url: "https://music.apple.com/de/artist/sk-rain/1778448647",
+    icon: <Apple />,
+    text: "Apple Music",
+  },
+  {
     url: "https://open.spotify.com/artist/1XIgVe3O2ohj35qCU9b7a9",
     icon: <Spotify />,
     text: "Spotify",
+  },
+  {
+    url: "https://www.instagram.com/sk_rain_/",
+    icon: <Instagram />,
+    text: "Instagram",
   },
 ];
 
