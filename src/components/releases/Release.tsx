@@ -26,7 +26,19 @@ export const Release: React.FC<{ release: ReleaseData; full?: boolean }> = ({
         ></div>
       ) : (
         <Link href={`/release/${id}`}>
-          <img src={image} alt={title} />
+          {typeof image === "object" ? (
+            <picture>
+              {image.map((url, index) =>
+                index === 0 ? (
+                  <source key={index} type="image/webp" srcSet={url} />
+                ) : (
+                  <img key={index} src={url} alt={title} />
+                )
+              )}
+            </picture>
+          ) : (
+            <img src={image} alt={title} />
+          )}
         </Link>
       )}
       <p dangerouslySetInnerHTML={{ __html: text }} />

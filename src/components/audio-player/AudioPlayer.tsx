@@ -11,12 +11,14 @@ import { AudioPlayerContext } from "../../contexts/audio-player";
 import "./AudioPlayer.css";
 import { Pause } from "../../icons/pause";
 import { Play } from "../../icons/play";
+import { EventApiContext } from "../../contexts/events-api";
 
 type AudioPlayerProps = {
   streamId: string;
 };
 
 export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
+  const { recordEvent } = useContext(EventApiContext);
   const {
     activeStreamId,
     players,
@@ -178,8 +180,10 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ streamId }) => {
             seekToButtonPosition();
           } else {
             if (playing) {
+              recordEvent("pause", { streamId });
               pause(streamId);
             } else {
+              recordEvent("play", { streamId });
               play(streamId);
             }
           }

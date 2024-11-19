@@ -17,32 +17,39 @@ import { ParallaxBackground } from "./components/parallax-background/ParallaxBac
 
 import "./App.css";
 import { ScrollToTop } from "./components/scroll-to-top";
+import { EventApiContextProvider } from "./contexts/events-api";
+import { LoadEvents } from "./components/load-events";
 
-export const App: React.FC = () => (
-  <>
-    <ScrollToTop />
-    <PlayerApiContextProvider>
-      <AudioPlayerContextProvider>
-        <ParallaxBackground />
-        <Header />
-        <Switch>
-          <Route path="/" component={HomeRoute} />
-          <Route path="/404" component={ErrorRoute} />
-          <Route path="/streams" component={StreamsRoute} />
-          <Route path="/stream/:streamId">
-            {(params) => <StreamRoute streamId={params.streamId} />}
-          </Route>
-          <Route path="/releases" component={ReleasesRoute} />
-          <Route path="/release/:releaseId">
-            {(params) => <ReleaseRoute releaseId={params.releaseId} />}
-          </Route>
+export const App: React.FC = () => {
+  return (
+    <>
+      <ScrollToTop />
+      <EventApiContextProvider>
+        <PlayerApiContextProvider>
+          <AudioPlayerContextProvider>
+            <LoadEvents />
+            <ParallaxBackground />
+            <Header />
+            <Switch>
+              <Route path="/" component={HomeRoute} />
+              <Route path="/404" component={ErrorRoute} />
+              <Route path="/streams" component={StreamsRoute} />
+              <Route path="/stream/:streamId">
+                {(params) => <StreamRoute streamId={params.streamId} />}
+              </Route>
+              <Route path="/releases" component={ReleasesRoute} />
+              <Route path="/release/:releaseId">
+                {(params) => <ReleaseRoute releaseId={params.releaseId} />}
+              </Route>
 
-          <Route>
-            <ErrorRoute />
-          </Route>
-        </Switch>
-        <NowPlaying />
-      </AudioPlayerContextProvider>
-    </PlayerApiContextProvider>
-  </>
-);
+              <Route>
+                <ErrorRoute />
+              </Route>
+            </Switch>
+            <NowPlaying />
+          </AudioPlayerContextProvider>
+        </PlayerApiContextProvider>
+      </EventApiContextProvider>
+    </>
+  );
+};
