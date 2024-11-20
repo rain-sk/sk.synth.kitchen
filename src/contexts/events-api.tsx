@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { apiToken } from "../data/token";
 import { bearerPrefix } from "../utils/bearer-prefix";
 import { randomId } from "../utils/random-id";
@@ -24,31 +24,26 @@ export const EventApiContext = React.createContext<EventApiContextValue>({
   recordEvent: () => {},
 });
 
+const getTokenOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    authorization: bearerPrefix(apiToken()),
+  },
+};
 export const EventApiContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const visitorId = useRef(randomId());
-  const [token, setToken] = useState<TokenResponse>();
-
+  const tokenRef = useRef<TokenResponse>();
   const updateAccessToken = useCallback(async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        authorization: bearerPrefix(apiToken()),
-      },
-    };
-
     return fetch(
       "https://cloud.seatable.io/api/v2.1/dtable/app-access-token/",
-      options
+      getTokenOptions
     )
       .then((res) => res.json())
-      .then((res) => {
-        setToken(res);
-        return res;
-      });
-  }, [setToken]);
+      .then((res) => (tokenRef.current = res));
+  }, []);
 
   useEffect(() => {
     updateAccessToken().catch((err) => console.error(err));
@@ -56,20 +51,23 @@ export const EventApiContextProvider: React.FC<React.PropsWithChildren> = ({
 
   const recordEvent = useCallback(
     async (type: string, data: Object) => {
-      let t = token ? token : await updateAccessToken();
-      if (!t || import.meta.env.MODE === "development") {
+      tokenRef.current = tokenRef.current ?? (await updateAccessToken());
+
+      if (!tokenRef.current || import.meta.env.MODE === "development") {
         return;
       }
+
       const options = {
         method: "POST",
         headers: {
           accept: "application/json",
           "content-type": "application/json",
-          authorization: bearerPrefix(t.access_token),
+          authorization: bearerPrefix(tokenRef.current.access_token),
         },
         body: JSON.stringify({
           rows: [
             {
+              Timestamp: new Date().toUTCString(),
               type,
               visitor_id: visitorId.current,
               path: window.location.href,
@@ -81,11 +79,11 @@ export const EventApiContextProvider: React.FC<React.PropsWithChildren> = ({
       };
 
       fetch(
-        `https://cloud.seatable.io/api-gateway/api/v2/dtables/${t.dtable_uuid}/rows/`,
+        `https://cloud.seatable.io/api-gateway/api/v2/dtables/${tokenRef.current.dtable_uuid}/rows/`,
         options
       ).catch((err) => console.error(err));
     },
-    [updateAccessToken, token]
+    [updateAccessToken, tokenRef]
   );
 
   return (

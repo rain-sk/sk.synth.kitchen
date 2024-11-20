@@ -1,24 +1,37 @@
-import { useContext, useEffect } from "react";
-import { EventApiContext } from "../contexts/events-api";
+import { useContext, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
+
+import { EventApiContext } from "../contexts/events-api";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 export const LoadEvents = () => {
   const { recordEvent } = useContext(EventApiContext);
-  const [location] = useLocation();
 
-  useEffect(() => {
-    fetch("https://api.db-ip.com/v2/free/self")
+  useEffectOnce(() => {
+    fetch(
+      "https://api.ipgeolocation.io/ipgeo?apiKey=85ac02341b9e4b7494409ac1b4950629"
+    )
       .then((res) => res.json())
       .then((location) => {
-        recordEvent("load", {
-          location: {
+        if (location && "city" in location && "country_name" in location) {
+          recordEvent("location", {
             city: location.city,
-            country: location.countryName,
-          },
-          ua: window.navigator.userAgent,
-        });
+            country: location.country_name,
+          });
+        }
       });
-  }, [location]);
+  });
+
+  const [browserLocation] = useLocation();
+  const locationRef = useRef<string>();
+  useEffect(() => {
+    if (locationRef.current !== browserLocation) {
+      locationRef.current = browserLocation;
+      recordEvent("load", {
+        ua: window.navigator.userAgent,
+      });
+    }
+  }, [browserLocation]);
 
   return null;
 };
