@@ -29,6 +29,7 @@ export const LoadEvents = () => {
       locationRef.current = browserLocation;
       recordEvent("load", {
         ua: window.navigator.userAgent,
+        referrer: document.referrer,
       });
     }
   }, [browserLocation]);
