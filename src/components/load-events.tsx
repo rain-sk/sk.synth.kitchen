@@ -7,9 +7,17 @@ export const LoadEvents = () => {
   const [location] = useLocation();
 
   useEffect(() => {
-    recordEvent("load", {
-      ua: window.navigator.userAgent,
-    });
+    fetch("https://api.db-ip.com/v2/free/self")
+      .then((res) => res.json())
+      .then((location) => {
+        recordEvent("load", {
+          location: {
+            city: location.city,
+            country: location.countryName,
+          },
+          ua: window.navigator.userAgent,
+        });
+      });
   }, [location]);
 
   return null;
