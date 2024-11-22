@@ -9,7 +9,6 @@ import { StreamRoute } from "./routes/stream";
 import { StreamsRoute } from "./routes/streams";
 
 import { AudioPlayerContextProvider } from "./contexts/audio-player";
-import { PlayerApiContextProvider } from "./contexts/plays-api";
 
 import { Header } from "./components/header/Header";
 import { NowPlaying } from "./components/now-playing/NowPlaying";
@@ -25,30 +24,28 @@ export const App: React.FC = () => {
     <>
       <ScrollToTop />
       <EventApiContextProvider>
-        <PlayerApiContextProvider>
-          <AudioPlayerContextProvider>
-            <LoadEvents />
-            <ParallaxBackground />
-            <Header />
-            <Switch>
-              <Route path="/" component={HomeRoute} />
-              <Route path="/404" component={ErrorRoute} />
-              <Route path="/streams" component={StreamsRoute} />
-              <Route path="/stream/:streamId">
-                {(params) => <StreamRoute streamId={params.streamId} />}
-              </Route>
-              <Route path="/releases" component={ReleasesRoute} />
-              <Route path="/release/:releaseId">
-                {(params) => <ReleaseRoute releaseId={params.releaseId} />}
-              </Route>
+        <AudioPlayerContextProvider>
+          <LoadEvents />
+          <ParallaxBackground />
+          <Header />
+          <Switch>
+            <Route path="/" component={HomeRoute} />
+            <Route path="/404" component={ErrorRoute} />
+            <Route path="/streams" component={StreamsRoute} />
+            <Route path="/stream/:streamId">
+              {(params) => <StreamRoute streamId={params.streamId} />}
+            </Route>
+            <Route path="/releases" component={ReleasesRoute} />
+            <Route path="/release/:releaseId">
+              {(params) => <ReleaseRoute releaseId={params.releaseId} />}
+            </Route>
 
-              <Route>
-                <ErrorRoute />
-              </Route>
-            </Switch>
-            <NowPlaying />
-          </AudioPlayerContextProvider>
-        </PlayerApiContextProvider>
+            <Route>
+              <ErrorRoute />
+            </Route>
+          </Switch>
+          <NowPlaying />
+        </AudioPlayerContextProvider>
       </EventApiContextProvider>
     </>
   );

@@ -1,13 +1,6 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { getStream, StreamInfo } from "../data/streams";
-import { PlayerApiContext } from "./plays-api";
 import ReactPlayer from "react-player/file";
 
 type AudioState = {
@@ -45,7 +38,6 @@ export const AudioPlayerContext = React.createContext<AudioPlayerContextValue>({
 export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const activeStreamRef = useRef<string>();
   const [activeStreamId, setActiveStreamId] = useState<string>();
   const [players, setPlayers] = useState<AudioStates>({});
   const [playerPositions, setPlayerPositions] = useState<AudioPositionState>(
@@ -53,27 +45,6 @@ export const AudioPlayerContextProvider: React.FC<React.PropsWithChildren> = ({
   );
   const playerPositionsRef = useRef<AudioPositionState>();
   const timerRef = useRef<number>();
-  const { incrementPlayCount } = useContext(PlayerApiContext);
-
-  const playTimerRef = useRef<number>();
-  useEffect(() => {
-    if (playTimerRef.current) {
-      clearTimeout(playTimerRef.current);
-      playTimerRef.current = undefined;
-    }
-
-    if (
-      activeStreamId !== undefined &&
-      activeStreamId !== activeStreamRef.current
-    ) {
-      playTimerRef.current = setTimeout(() => {
-        if (activeStreamId === activeStreamRef.current) {
-          incrementPlayCount(activeStreamId);
-        }
-      }, 30000);
-    }
-    activeStreamRef.current = activeStreamId;
-  }, [activeStreamRef, activeStreamId, incrementPlayCount]);
 
   const startTimer = (player: AudioState, streamId: string) => {
     if (timerRef.current) {
