@@ -20,6 +20,10 @@ type TokenResponse = {
   dtable_name: string;
 };
 
+const suppressEvents = () =>
+  import.meta.env.MODE === "development" ||
+  document.cookie.match(/^(.*;)?\s*itsme\s*=\s*[^;]+(.*)?$/);
+
 export const EventApiContext = React.createContext<EventApiContextValue>({
   recordEvent: () => {},
 });
@@ -53,11 +57,7 @@ export const EventApiContextProvider: React.FC<React.PropsWithChildren> = ({
     async (type: string, data: Object) => {
       tokenRef.current = tokenRef.current ?? (await updateAccessToken());
 
-      if (
-        !tokenRef.current ||
-        import.meta.env.MODE === "development" ||
-        document.cookie.match(/^(.*;)?\s*itsme\s*=\s*[^;]+(.*)?$/)
-      ) {
+      if (!tokenRef.current || suppressEvents()) {
         return;
       }
 
