@@ -53,7 +53,11 @@ export const EventApiContextProvider: React.FC<React.PropsWithChildren> = ({
     async (type: string, data: Object) => {
       tokenRef.current = tokenRef.current ?? (await updateAccessToken());
 
-      if (!tokenRef.current || import.meta.env.MODE === "development") {
+      if (
+        !tokenRef.current ||
+        import.meta.env.MODE === "development" ||
+        document.cookie.match(/^(.*;)?\s*itsme\s*=\s*[^;]+(.*)?$/)
+      ) {
         return;
       }
 
