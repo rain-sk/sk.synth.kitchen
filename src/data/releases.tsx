@@ -70,7 +70,7 @@ export const releases: ReleaseData[] = [
       {
         text: "apple music",
         icon: <Apple />,
-        url: "https://music.apple.com/de/album/zela-ep/1778449418?l=en-GB",
+        url: "https://music.apple.com/album/zela-ep/1778449418",
       },
       {
         text: "youtube",
@@ -87,6 +87,23 @@ export const releases: ReleaseData[] = [
     text: `Sk [Rain]'s debut EP, featuring a diverse range of genres and styles that have captured their imagination. From minimal/ambient house to "sound fields", Fields is a journey into the sonic landscapes that inspire Sk [Rain]. Listeners are invited to explore the interplay between music and environment.`,
     id: "fields",
     image: [fieldsWebp, fieldsPng],
+    streams: [
+      {
+        text: "spotify",
+        icon: <Spotify />,
+        url: "https://open.spotify.com/album/4TXnCYRLnldlf8I9HETR9R",
+      },
+      {
+        text: "apple music",
+        icon: <Apple />,
+        url: "https://music.apple.com/album/fields-ep/1781527829",
+      },
+      {
+        text: "youtube",
+        icon: <YouTube />,
+        url: "https://music.youtube.com/playlist?list=OLAK5uy_llCA_ZU2pqPLaZNs-ebPNj_LVkpRokkjI",
+      },
+    ],
   },
 ];
 
