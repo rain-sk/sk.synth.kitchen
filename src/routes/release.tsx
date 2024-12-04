@@ -21,7 +21,7 @@ export const ReleaseRoute: React.FC<ReleaseRouteProps> = ({ releaseId }) => {
     <main>
       <section>
         <header>
-          <h2>release</h2>
+          <h2>{release.title}</h2>
           <Link href="/releases">see all</Link>
         </header>
         <Release key={release.title} release={release} full />

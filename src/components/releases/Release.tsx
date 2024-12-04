@@ -10,20 +10,25 @@ export const Release: React.FC<{ release: ReleaseData; full?: boolean }> = ({
   full,
 }) => (
   <article className={`release${full ? " full" : ""}`}>
-    <header>
-      <h3>
-        <Link href={`/release/${id}`}>{title}</Link>
-      </h3>
-      <aside>{aside}</aside>
-    </header>
+    {!full && (
+      <header>
+        <h3>
+          <Link href={`/release/${id}`}>{title}</Link>
+        </h3>
+        <aside>{aside}</aside>
+      </header>
+    )}
     <section>
       {full ? (
-        <div
-          className="embed-container"
-          dangerouslySetInnerHTML={{
-            __html: iframe,
-          }}
-        ></div>
+        <>
+          <div
+            className="embed-container"
+            dangerouslySetInnerHTML={{
+              __html: iframe,
+            }}
+          ></div>
+          <p dangerouslySetInnerHTML={{ __html: text }} />
+        </>
       ) : (
         <Link href={`/release/${id}`}>
           {typeof image === "object" ? (
@@ -41,7 +46,6 @@ export const Release: React.FC<{ release: ReleaseData; full?: boolean }> = ({
           )}
         </Link>
       )}
-      <p dangerouslySetInnerHTML={{ __html: text }} />
     </section>
   </article>
 );

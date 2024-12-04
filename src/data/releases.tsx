@@ -49,7 +49,7 @@ export const releases: ReleaseData[] = [
       {
         text: "tidal",
         icon: <Tidal />,
-        url: "https://tidal.com/browse/track/395644719?u",
+        url: "https://listen.tidal.com/album/395644717/track/395644719",
       },
     ],
   },
