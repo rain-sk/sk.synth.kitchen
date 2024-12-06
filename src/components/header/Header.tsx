@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { ProfilePicture } from "./ProfilePicture";
 
 import "./Header.css";
+import { EventLink } from "../EventLink";
 
 export const Header: React.FC = () => (
   <nav>
@@ -18,8 +19,13 @@ export const Header: React.FC = () => (
       </h1>
       <p>Producer | DJ | Music&nbsp;Technologist</p>
       <p>
-        <a href="mailto:contact@synth.kitchen">Reach&nbsp;Out</a> |{" "}
-        <a href="mailto:booking@synth.kitchen">Booking&nbsp;Inquiries</a>
+        <EventLink href="mailto:contact@synth.kitchen">
+          Reach&nbsp;Out
+        </EventLink>{" "}
+        |{" "}
+        <EventLink href="mailto:booking@synth.kitchen">
+          Booking&nbsp;Inquiries
+        </EventLink>
       </p>
     </div>
   </nav>

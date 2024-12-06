@@ -1,4 +1,5 @@
 import React from "react";
+import { EventLink } from "../EventLink";
 
 export const Bio: React.FC = () => (
   <section>
@@ -11,21 +12,21 @@ export const Bio: React.FC = () => (
     <p>
       When they aren't doing music or working as a product leader at Ableton, Sk
       [Rain] is active with{" "}
-      <a href="https://eclatcrew.com" target="_blank">
+      <EventLink href="https://eclatcrew.com" target="_blank">
         Éclat Crew
-      </a>{" "}
+      </EventLink>{" "}
       and the{" "}
-      <a href="https://resonancemusicretreat.xyz" target="_blank">
+      <EventLink href="https://resonancemusicretreat.xyz" target="_blank">
         Resonance Music Community
-      </a>
+      </EventLink>
       , and co-organizes the{" "}
-      <a href="https://rush.berlin" target="_blank">
+      <EventLink href="https://rush.berlin" target="_blank">
         Rush DJ Livestream
-      </a>
+      </EventLink>
       . They also build and use{" "}
-      <a href="https://synth.kitchen" target="_blank">
+      <EventLink href="https://synth.kitchen" target="_blank">
         synth.kitchen
-      </a>
+      </EventLink>
       , a web-based modular synthesis environment geared toward experimental
       sound design.
     </p>

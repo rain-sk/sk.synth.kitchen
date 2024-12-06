@@ -1,5 +1,6 @@
 import React from "react";
 import "./SocialLinks.css";
+import { EventLink } from "../EventLink";
 
 export type SocialLinkInfo = {
   text: string;
@@ -13,10 +14,10 @@ export const SocialLinks: React.FC<{ links: SocialLinkInfo[] }> = ({
   <ul className="socials">
     {links.map((link, i) => (
       <li key={i}>
-        <a href={link.url} target="_blank">
+        <EventLink href={link.url} target="_blank">
           {link.icon}
           <span className="visually-hidden">{link.text}</span>
-        </a>
+        </EventLink>
       </li>
     ))}
   </ul>

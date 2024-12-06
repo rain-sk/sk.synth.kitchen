@@ -1,5 +1,7 @@
 import React from "react";
 
+import { EventLink } from "../../components/EventLink";
+
 import { SocialLinks } from "../social-links/SocialLinks";
 
 import { Plug } from "../../icons/plug";
@@ -45,19 +47,19 @@ export const Links: React.FC = () => (
     <section>
       <h2>linktree</h2>
 
-      <a className="link" href="https://synth.kitchen" target="_blank">
+      <EventLink className="link" href="https://synth.kitchen" target="_blank">
         <Plug />
         <p>Synth Kitchen - a web-based modular synthesizer</p>
-      </a>
-      <a
+      </EventLink>
+      <EventLink
         className="link"
         href="https://sk-rain.bandcamp.com/follow_me"
         target="_blank"
       >
         <Bandcamp />
         <p>Follow Sk [Rain] on Bandcamp</p>
-      </a>
-      <a
+      </EventLink>
+      <EventLink
         className="link"
         href="https://soundcloud.com/sk-rain/sets/eclat-crew"
         target="_blank"
@@ -65,19 +67,19 @@ export const Links: React.FC = () => (
         <SoundCloud />
         <span className="visually-hidden">SoundCloud</span>
         <p>Sk [Rain]'s tracks from Éclat Crew</p>
-      </a>
-      <a className="link" href="https://eclatcrew.com" target="_blank">
+      </EventLink>
+      <EventLink className="link" href="https://eclatcrew.com" target="_blank">
         <Headphones />
         <p>The Éclat Crew Website</p>
-      </a>
-      <a
+      </EventLink>
+      <EventLink
         className="link"
         href="https://instagram.com/rush_berlin"
         target="_blank"
       >
         <Instagram />
         <p>Rush on Instagram</p>
-      </a>
+      </EventLink>
     </section>
     <section>
       <h2>find me on</h2>
